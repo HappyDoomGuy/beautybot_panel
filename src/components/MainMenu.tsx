@@ -56,7 +56,7 @@ const MainMenu: React.FC<MainMenuProps> = ({ onAppSelect }) => {
                   >
                     <div 
                       className={`
-                        w-full h-28 p-5 shadow-lg
+                        w-full h-28 p-5 shadow-lg rounded-3xl
                         ${app.colorClass} hover:${app.hoverColor}
                         group cursor-pointer
                         transition-all duration-300
