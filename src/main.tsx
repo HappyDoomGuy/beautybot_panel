@@ -4,7 +4,20 @@ import App from './App.tsx'
 import './index.css'
 
 // Random background selection
-const backgroundImages = ['/hearts.jpg', '/image2.jpg'];
+const backgroundImages = [
+  '/hearts.jpg',
+  '/image2.jpg',
+  '/image3.jpg',
+  '/image4.jpg',
+  '/image5.jpg',
+  '/image6.jpg',
+  '/image7.jpg',
+  '/image8.jpg',
+  '/image9.jpg',
+  '/image10.jpg',
+  '/image11.jpg',
+  '/image12.jpg'
+];
 const selectedBackground = backgroundImages[Math.floor(Math.random() * backgroundImages.length)];
 
 // Set CSS variable for background image
