@@ -27,18 +27,18 @@ input, textarea, [contenteditable] {
   user-select: text;
 }
 
-/* Нежно розовый фон */
+/* Фон с изображением hearts.jpg */
 body {
-  background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%) !important;
+  background: url('/hearts.jpg') center/cover no-repeat fixed, linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%) !important;
   min-height: 100vh;
   font-family: system-ui, -apple-system, sans-serif;
   color: #333333;
 }
 
-/* Принудительно розовый фон */
+/* Принудительно фон с hearts.jpg */
 @media (prefers-color-scheme: dark) {
   body {
-    background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%) !important;
+    background: url('/hearts.jpg') center/cover no-repeat fixed, linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%) !important;
     color: #333333;
   }
 }
