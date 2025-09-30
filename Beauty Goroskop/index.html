@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='%23c084fc'%3e%3cpath stroke-linecap='round' stroke-linejoin='round' d='M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456Z' /%3e%3c/svg%3e" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Beauty Oracle</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+      body {
+        font-family: 'Montserrat', sans-serif;
+        background-color: #0c0a1a;
+        background-image: 
+          radial-gradient(circle at 25% 25%, rgba(100, 116, 225, 0.2) 0%, transparent 50%),
+          radial-gradient(circle at 75% 75%, rgba(139, 92, 246, 0.2) 0%, transparent 50%);
+        position: relative;
+        overflow-x: hidden;
+      }
+      
+      /* Анимированные звезды - первый слой */
+      body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 200%;
+        height: 200%;
+        background-image: 
+          radial-gradient(3px 3px at 20px 30px, #eee, transparent),
+          radial-gradient(2px 2px at 90px 40px, #fff, transparent),
+          radial-gradient(3px 3px at 160px 30px, #ddd, transparent),
+          radial-gradient(2px 2px at 220px 20px, #fff, transparent),
+          radial-gradient(2px 2px at 280px 10px, #eee, transparent),
+          radial-gradient(3px 3px at 350px 80px, #fff, transparent),
+          radial-gradient(2px 2px at 410px 70px, #ddd, transparent),
+          radial-gradient(2px 2px at 470px 90px, #fff, transparent),
+          radial-gradient(2px 2px at 530px 10px, #eee, transparent),
+          radial-gradient(2px 2px at 590px 30px, #fff, transparent);
+        background-size: 800px 120px;
+        animation: sparkle1 60s linear infinite;
+        pointer-events: none;
+        z-index: 1;
+      }
+      
+      /* Анимированные звезды - второй слой */
+      body::after {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 200%;
+        height: 200%;
+        background-image: 
+          radial-gradient(2px 2px at 100px 80px, rgba(255,255,255,0.6), transparent),
+          radial-gradient(2px 2px at 200px 10px, rgba(255,255,255,0.5), transparent),
+          radial-gradient(2px 2px at 300px 70px, rgba(255,255,255,0.4), transparent),
+          radial-gradient(2px 2px at 400px 30px, rgba(255,255,255,0.6), transparent),
+          radial-gradient(2px 2px at 550px 50px, rgba(255,255,255,0.5), transparent);
+        background-size: 700px 110px;
+        animation: sparkle2 80s linear infinite;
+        pointer-events: none;
+        z-index: 1;
+      }
+      
+      /* Дополнительный слой для более плотного покрытия */
+      .stars-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 200%;
+        height: 200%;
+        background-image: 
+          radial-gradient(1px 1px at 80px 20px, rgba(255,255,255,0.4), transparent),
+          radial-gradient(1px 1px at 180px 10px, rgba(255,255,255,0.5), transparent),
+          radial-gradient(1px 1px at 250px 80px, rgba(255,255,255,0.3), transparent),
+          radial-gradient(1px 1px at 320px 30px, rgba(255,255,255,0.4), transparent),
+          radial-gradient(1px 1px at 450px 50px, rgba(255,255,255,0.5), transparent);
+        background-size: 500px 80px;
+        animation: sparkle3 100s linear infinite;
+        pointer-events: none;
+        z-index: 1;
+      }
+      
+      @keyframes sparkle1 {
+        0% { transform: translateX(0) translateY(0); }
+        100% { transform: translateX(-800px) translateY(120px); }
+      }
+      
+      @keyframes sparkle2 {
+        0% { transform: translateX(-100px) translateY(-50px); }
+        100% { transform: translateX(-800px) translateY(60px); }
+      }
+      
+      @keyframes sparkle3 {
+        0% { transform: translateX(-200px) translateY(-30px); }
+        100% { transform: translateX(-700px) translateY(50px); }
+      }
+      
+      /* Анимация мерцания отдельных звезд */
+      @keyframes twinkle {
+        0%, 100% { opacity: 0.1; }
+        50% { opacity: 1; }
+      }
+      
+      @keyframes twinkle-slow {
+        0%, 100% { opacity: 0.05; }
+        50% { opacity: 0.9; }
+      }
+      
+      @keyframes twinkle-fast {
+        0%, 100% { opacity: 0.2; }
+        25%, 75% { opacity: 1; }
+        50% { opacity: 0.7; }
+      }
+      
+      /* Слой мерцающих звезд - движущийся слой 1 */
+      .twinkling-stars-1 {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 200%;
+        height: 200%;
+        background-image: 
+          radial-gradient(2px 2px at 20px 30px, rgba(255,255,255,0.9), transparent),
+          radial-gradient(2px 2px at 160px 30px, rgba(255,255,255,0.8), transparent),
+          radial-gradient(2px 2px at 350px 80px, rgba(255,255,255,1), transparent);
+        background-size: 800px 120px;
+        animation: sparkle1 60s linear infinite, twinkle 3s ease-in-out infinite;
+        pointer-events: none;
+        z-index: 10;
+      }
+      
+      /* Слой мерцающих звезд - движущийся слой 2 */
+      .twinkling-stars-2 {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 200%;
+        height: 200%;
+        background-image: 
+          radial-gradient(2px 2px at 100px 80px, rgba(255,255,255,0.7), transparent),
+          radial-gradient(2px 2px at 400px 30px, rgba(255,255,255,0.9), transparent);
+        background-size: 700px 110px;
+        animation: sparkle2 80s linear infinite, twinkle-slow 4s ease-in-out infinite;
+        pointer-events: none;
+        z-index: 10;
+      }
+      
+      /* Слой мерцающих звезд - движущийся слой 3 */
+      .twinkling-stars-3 {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 200%;
+        height: 200%;
+        background-image: 
+          radial-gradient(1px 1px at 250px 80px, rgba(255,255,255,0.8), transparent),
+          radial-gradient(1px 1px at 450px 50px, rgba(255,255,255,0.9), transparent);
+        background-size: 500px 80px;
+        animation: sparkle3 100s linear infinite, twinkle-fast 2s ease-in-out infinite;
+        pointer-events: none;
+        z-index: 10;
+      }
+      
+      .font-cinzel {
+        font-family: 'Cinzel', serif;
+      }
+      @keyframes fade-in {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes fade-in-up {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .animate-fade-in {
+        animation: fade-in 0.6s ease-out;
+      }
+      .animate-fade-in-up {
+        animation: fade-in-up 0.8s ease-out;
+      }
+    </style>
+</head>
+  <body>
+    <div class="stars-overlay"></div>
+    <div class="twinkling-stars-1"></div>
+    <div class="twinkling-stars-2"></div>
+    <div class="twinkling-stars-3"></div>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>

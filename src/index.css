@@ -1,0 +1,351 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-gray-200 dark:border-gray-700;
+  }
+  
+  body {
+    @apply bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50 dark:from-gray-900 dark:via-purple-900 dark:to-blue-900;
+    @apply text-gray-900 dark:text-gray-100;
+    @apply min-h-screen;
+    @apply font-sans;
+  }
+  
+  html {
+    @apply scroll-smooth;
+  }
+}
+
+@layer components {
+  /* Glass morphism effect */
+  .glass {
+    @apply bg-white/10 backdrop-blur-md border border-white/20;
+  }
+  
+  .glass-dark {
+    @apply bg-gray-900/20 backdrop-blur-md border border-gray-700/30;
+  }
+  
+  /* Card components */
+  .app-card {
+    @apply bg-white dark:bg-gray-800;
+    @apply rounded-2xl shadow-xl;
+    @apply border border-gray-200 dark:border-gray-700;
+    @apply transition-all duration-300 ease-in-out;
+    @apply hover:shadow-2xl hover:scale-105;
+    @apply active:scale-95;
+  }
+  
+  .app-card:hover {
+    @apply border-purple-300 dark:border-purple-600;
+  }
+  
+  /* Button components */
+  .btn-primary {
+    @apply bg-gradient-to-r from-purple-500 to-pink-500;
+    @apply text-white font-semibold;
+    @apply px-6 py-3 rounded-xl;
+    @apply shadow-lg hover:shadow-xl;
+    @apply transition-all duration-300;
+    @apply hover:from-purple-600 hover:to-pink-600;
+    @apply active:scale-95;
+  }
+  
+  .btn-secondary {
+    @apply bg-white dark:bg-gray-700;
+    @apply text-gray-700 dark:text-gray-200;
+    @apply border border-gray-300 dark:border-gray-600;
+    @apply px-6 py-3 rounded-xl;
+    @apply shadow-md hover:shadow-lg;
+    @apply transition-all duration-300;
+    @apply hover:bg-gray-50 dark:hover:bg-gray-600;
+    @apply active:scale-95;
+  }
+  
+  /* Navigation */
+  .nav-link {
+    @apply text-gray-600 dark:text-gray-300;
+    @apply hover:text-purple-600 dark:hover:text-purple-400;
+    @apply transition-colors duration-200;
+    @apply font-medium;
+  }
+  
+  .nav-link.active {
+    @apply text-purple-600 dark:text-purple-400;
+    @apply font-semibold;
+  }
+  
+  /* Typography */
+  .heading-primary {
+    @apply text-4xl md:text-5xl font-bold;
+    @apply bg-gradient-to-r from-purple-600 to-pink-600;
+    @apply bg-clip-text text-transparent;
+  }
+  
+  .heading-secondary {
+    @apply text-2xl md:text-3xl font-semibold;
+    @apply text-gray-800 dark:text-gray-200;
+  }
+  
+  /* Animations */
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.4s ease-out;
+  }
+  
+  /* Mobile optimizations */
+  @media (max-width: 768px) {
+    .app-card {
+      margin-left: 0.5rem;
+      margin-right: 0.5rem;
+    }
+    
+    .heading-primary {
+      font-size: 1.5rem;
+      line-height: 2rem;
+    }
+    
+    .heading-secondary {
+      font-size: 1.125rem;
+      line-height: 1.75rem;
+    }
+    
+    /* Touch-friendly buttons */
+    .btn-primary,
+    .btn-secondary {
+      min-height: 44px;
+      min-width: 44px;
+    }
+    
+    /* Better form controls on mobile */
+    input[type="range"] {
+      height: 0.75rem;
+    }
+    
+    input[type="range"]::-webkit-slider-thumb {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+    
+    input[type="range"]::-moz-range-thumb {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+    
+    /* Improved text sizes for mobile */
+    .text-xs {
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+    }
+    
+    .text-sm {
+      font-size: 1rem;
+      line-height: 1.5rem;
+    }
+    
+    /* Better card padding on mobile */
+    .app-card {
+      padding: 1rem;
+    }
+    
+    /* Improved grid layouts for mobile */
+    .grid-cols-3 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    
+    .grid-cols-4 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  
+  /* Extra small devices */
+  @media (max-width: 480px) {
+    .heading-primary {
+      font-size: 1.25rem;
+      line-height: 1.75rem;
+    }
+    
+    .heading-secondary {
+      font-size: 1.125rem;
+      line-height: 1.75rem;
+    }
+    
+    .app-card {
+      margin-left: 0.25rem;
+      margin-right: 0.25rem;
+      padding: 0.75rem;
+    }
+    
+    .grid-cols-2 {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+    
+    .text-base {
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+    }
+  }
+}
+
+@layer utilities {
+  /* Custom scrollbar */
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(156 163 175) transparent;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: rgb(156 163 175);
+    border-radius: 3px;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(107 114 128);
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .scrollbar-thin {
+    scrollbar-color: rgb(75 85 99) transparent;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: rgb(75 85 99);
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(107 114 128);
+  }
+}
+
+/* Selection styling */
+::selection {
+  @apply bg-purple-200 dark:bg-purple-800 text-purple-900 dark:text-purple-100;
+}
+
+/* Focus styles */
+.focus-visible {
+  @apply outline-none ring-2 ring-purple-500 ring-offset-2 ring-offset-white dark:ring-offset-gray-900;
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* Custom slider styles */
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.slider::-webkit-slider-track {
+  background: rgb(229 231 235);
+  border-radius: 9999px;
+  height: 8px;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  background: rgb(59 130 246);
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.slider::-webkit-slider-thumb:hover {
+  background: rgb(37 99 235);
+  transform: scale(1.1);
+}
+
+.slider::-moz-range-track {
+  background: rgb(229 231 235);
+  border-radius: 9999px;
+  height: 8px;
+  border: none;
+}
+
+.slider::-moz-range-thumb {
+  background: rgb(59 130 246);
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.slider::-moz-range-thumb:hover {
+  background: rgb(37 99 235);
+  transform: scale(1.1);
+}
+
+/* Dark mode slider styles */
+@media (prefers-color-scheme: dark) {
+  .slider::-webkit-slider-track {
+    background: rgb(75 85 99);
+  }
+  
+  .slider::-webkit-slider-thumb {
+    background: rgb(96 165 250);
+  }
+  
+  .slider::-webkit-slider-thumb:hover {
+    background: rgb(59 130 246);
+  }
+  
+  .slider::-moz-range-track {
+    background: rgb(75 85 99);
+  }
+  
+  .slider::-moz-range-thumb {
+    background: rgb(96 165 250);
+  }
+  
+  .slider::-moz-range-thumb:hover {
+    background: rgb(59 130 246);
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .slider::-webkit-slider-thumb {
+    height: 24px;
+    width: 24px;
+  }
+  
+  .slider::-moz-range-thumb {
+    height: 24px;
+    width: 24px;
+  }
+  
+  /* Larger touch targets */
+  button, input, select {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}

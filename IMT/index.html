@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ru" class="overflow-x-hidden">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Калькулятор ИМТ и обмена веществ</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/heroicons/2.0.18/24/outline/academic-cap.min.js" rel="stylesheet"> <!-- Example, not used directly but shows icon availability -->
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.1.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.1.0/",
+    "react/": "https://esm.sh/react@^19.1.0/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.5.1"
+  }
+}
+</script>
+<style>
+  body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+
+  /* Custom Range Slider Styles */
+  input[type="range"].custom-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent; /* Track background is handled by neumorphicInsetEffect on the input element */
+    cursor: pointer;
+    width: 100%;
+    padding: 0; 
+    margin: 0;
+  }
+
+  /* Remove default focus outline from the input element itself */
+  input[type="range"].custom-slider-thumb:focus {
+    outline: none;
+  }
+
+  /* Webkit (Chrome, Safari, Edge) Thumb */
+  input[type="range"].custom-slider-thumb::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 28px;
+    height: 28px;
+    background-color: #ECECEC; /* Milky white */
+    border-radius: 50%;
+    border: none;
+    margin-top: -10px; /* (28px thumb - 8px track H)/2 = -10px */
+    box-shadow: 2px 2px 4px #C1C1C1, -2px -2px 4px #FFFFFF; /* Softer neumorphic extrude for light theme */
+    transition: background-color 0.15s ease-in-out, transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+
+  /* Mozilla (Firefox) Thumb */
+  input[type="range"].custom-slider-thumb::-moz-range-thumb {
+    width: 28px;
+    height: 28px;
+    background-color: #ECECEC; /* Milky white */
+    border-radius: 50%;
+    border: none;
+    box-shadow: 2px 2px 4px #C1C1C1, -2px -2px 4px #FFFFFF; /* Softer neumorphic extrude for light theme */
+    transition: background-color 0.15s ease-in-out, transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+
+  /* Dark Mode Thumbs */
+  .dark input[type="range"].custom-slider-thumb::-webkit-slider-thumb {
+    background-color: #ECECEC; /* Milky white */
+    box-shadow: 3px 3px 5px #111726, -3px -3px 5px #2b384e; /* Enhanced neumorphic extrude dark */
+  }
+  .dark input[type="range"].custom-slider-thumb::-moz-range-thumb {
+    background-color: #ECECEC; /* Milky white */
+    box-shadow: 3px 3px 5px #111726, -3px -3px 5px #2b384e; /* Enhanced neumorphic extrude dark */
+  }
+
+  /* Hover States */
+  input[type="range"].custom-slider-thumb::-webkit-slider-thumb:hover {
+    background-color: #F5F5F5; /* Lighter milky white for hover */
+    transform: scale(1.05);
+  }
+  .dark input[type="range"].custom-slider-thumb::-webkit-slider-thumb:hover {
+    background-color: #F5F5F5; /* Lighter milky white for hover */
+    transform: scale(1.05);
+  }
+  input[type="range"].custom-slider-thumb::-moz-range-thumb:hover {
+    background-color: #F5F5F5; /* Lighter milky white for hover */
+    transform: scale(1.05);
+  }
+  .dark input[type="range"].custom-slider-thumb::-moz-range-thumb:hover {
+    background-color: #F5F5F5; /* Lighter milky white for hover */
+    transform: scale(1.05);
+  }
+
+  /* Active (Pressed) States */
+  input[type="range"].custom-slider-thumb::-webkit-slider-thumb:active {
+    transform: scale(0.95);
+    box-shadow: inset 2px 2px 4px #B0B0B0, inset -2px -2px 4px #FFFFFF; /* Neumorphic inset for light theme, adjusted for volume - MORE CONTRAST */
+  }
+  .dark input[type="range"].custom-slider-thumb::-webkit-slider-thumb:active {
+    transform: scale(0.95);
+    box-shadow: inset 2px 2px 4px #111726, inset -2px -2px 4px #2b384e; /* Neumorphic inset dark, adjusted for volume */
+  }
+  input[type="range"].custom-slider-thumb::-moz-range-thumb:active {
+    transform: scale(0.95);
+    box-shadow: inset 2px 2px 4px #B0B0B0, inset -2px -2px 4px #FFFFFF; /* Neumorphic inset for light theme, adjusted for volume - MORE CONTRAST */
+  }
+  .dark input[type="range"].custom-slider-thumb::-moz-range-thumb:active {
+    transform: scale(0.95);
+    box-shadow: inset 2px 2px 4px #111726, inset -2px -2px 4px #2b384e; /* Neumorphic inset dark, adjusted for volume */
+  }
+  
+  /* Focus-visible state for keyboard navigation (thumb focus ring) */
+  input[type="range"].custom-slider-thumb:focus-visible::-webkit-slider-thumb {
+    outline: 2px solid #4f46e5; /* indigo-600 for light mode */
+    outline-offset: 2px;
+  }
+  .dark input[type="range"].custom-slider-thumb:focus-visible::-webkit-slider-thumb {
+    outline: 2px solid #818cf8; /* indigo-400 for dark mode */
+    outline-offset: 2px;
+  }
+  input[type="range"].custom-slider-thumb:focus-visible::-moz-range-thumb {
+    outline: 2px solid #4f46e5; /* indigo-600 for light mode */
+    outline-offset: 2px;
+  }
+  .dark input[type="range"].custom-slider-thumb:focus-visible::-moz-range-thumb {
+    outline: 2px solid #818cf8; /* indigo-400 for dark mode */
+    outline-offset: 2px;
+  }
+
+  /* Track styling for Webkit and Mozilla */
+  input[type="range"].custom-slider-thumb::-webkit-slider-runnable-track {
+    height: 8px; /* h-2 from Tailwind */
+    border-radius: 9999px; /* rounded-lg from Tailwind */
+  }
+  input[type="range"].custom-slider-thumb::-moz-range-track {
+    height: 8px; /* h-2 from Tailwind */
+    border-radius: 9999px; /* rounded-lg from Tailwind */
+    border: none; 
+  }
+</style>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="bg-gray-200 dark:bg-slate-800 text-slate-800 dark:text-slate-200 transition-colors duration-300 ease-in-out overflow-x-hidden">
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+  <script>
+    function setThemeClass() {
+      if (window.Telegram && window.Telegram.WebApp) {
+        Telegram.WebApp.expand();
+        // The following line attempts to set a read-only property.
+        // It's included as per your provided script, but may not have an effect.
+        Telegram.WebApp.viewportStableHeight = 100;
+
+        // Отключаем вертикальный свайп
+        if (Telegram.WebApp.disableVerticalSwipes) {
+            Telegram.WebApp.disableVerticalSwipes();
+        } else {
+            // Альтернативный метод для предотвращения закрытия при свайпе вниз
+            const overflow = 100;
+            // Ensure document.body is available before manipulating its style
+            if (document.body) {
+                document.body.style.overflowY = 'hidden';
+                document.body.style.marginTop = `${overflow}px`;
+                document.body.style.height = window.innerHeight + overflow + "px";
+                document.body.style.paddingBottom = `${overflow}px`;
+                window.scrollTo(0, overflow);
+
+                let ts;
+                const onTouchStart = (e) => {
+                    ts = e.touches[0].clientY;
+                };
+                const onTouchMove = (e) => {
+                    const scroll = document.body.scrollTop || document.documentElement.scrollTop;
+                    const te = e.changedTouches[0].clientY;
+                    if (scroll <= 0 && ts < te) {
+                        e.preventDefault();
+                    }
+                };
+                document.documentElement.addEventListener('touchstart', onTouchStart, { passive: false });
+                document.documentElement.addEventListener('touchmove', onTouchMove, { passive: false });
+            } else {
+                console.warn("document.body not available for swipe prevention styles.");
+            }
+        }
+      } else {
+        console.warn("Telegram.WebApp is not available. Skipping Mini App specific setup.");
+      }
+    }
+
+    // Ensure Telegram.WebApp is available before setting up events or calling setThemeClass
+    if (window.Telegram && window.Telegram.WebApp && typeof Telegram.WebApp.onEvent === 'function') {
+        Telegram.WebApp.onEvent('themeChanged', setThemeClass);
+        // Call setThemeClass after a short delay to ensure the WebApp is fully initialized
+        // and DOM manipulations are less likely to conflict with React rendering.
+        setTimeout(setThemeClass, 100); 
+    } else {
+        // If running outside Telegram or if the script hasn't loaded Telegram.WebApp yet
+        console.warn("Telegram WebApp SDK not fully available. Mini App features might not be initialized.");
+        // Attempt to run if it becomes available later (e.g. async script load)
+        // This is a simplified approach; a more robust solution might involve custom events or retries.
+        window.addEventListener('load', () => {
+            if (window.Telegram && window.Telegram.WebApp && typeof Telegram.WebApp.onEvent === 'function') {
+                Telegram.WebApp.onEvent('themeChanged', setThemeClass);
+                setTimeout(setThemeClass, 100);
+            }
+        });
+    }
+  </script>
+</body>
+</html>

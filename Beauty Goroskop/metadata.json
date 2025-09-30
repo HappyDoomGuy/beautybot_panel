@@ -1,0 +1,5 @@
+{
+  "name": "Beauty Oracle",
+  "description": "A beautifully designed web application that provides users with a detailed daily beauty horoscope. Users select their zodiac sign to receive personalized astrological insights for the day, presented in a stylish and intuitive interface.",
+  "requestFramePermissions": []
+}
