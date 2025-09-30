@@ -5,8 +5,6 @@ import { analyzeBloodTest } from './lab-analysis/services/geminiService';
 import { Disclaimer } from './lab-analysis/components/Disclaimer';
 import { Spinner } from './lab-analysis/components/Spinner';
 import { UploadIcon, AlertTriangleIcon, DocumentTextIcon } from './lab-analysis/components/Icons';
-import { BannerCarousel } from './lab-analysis/components/BannerCarousel';
-import { appConfig } from './lab-analysis/config';
 import { AppNavigation } from '../components/AppNavigation';
 
 interface LabAnalysisAppProps {
@@ -142,7 +140,7 @@ const LabAnalysisApp: React.FC<LabAnalysisAppProps> = ({ onBack }) => {
               Интерпретация результатов анализов крови
             </h1>
             <p className="text-gray-700">
-              Загрузите ваш анализ, и ИИ проанализирует его.
+              Загрузите ваш анализ для расшифровки при помощи ИИ.
             </p>
           </header>
 
@@ -250,17 +248,6 @@ const LabAnalysisApp: React.FC<LabAnalysisAppProps> = ({ onBack }) => {
             </ConditionalSection>
             
             <Disclaimer />
-
-            {/* Banner Carousel Section */}
-            {appConfig.enableBanners && appConfig.bannerItems.length > 0 && (
-              <section aria-labelledby="banner-carousel-title">
-                <h2 id="banner-carousel-title" className="sr-only">Рекламные баннеры</h2>
-                <BannerCarousel 
-                  banners={appConfig.bannerItems} 
-                  autoplayInterval={appConfig.defaultAutoplayInterval} 
-                />
-              </section>
-            )}
           </div>
         </div>
       </main>
