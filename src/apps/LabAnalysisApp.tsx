@@ -133,9 +133,9 @@ const LabAnalysisApp: React.FC<LabAnalysisAppProps> = ({ onBack }) => {
         gradient="from-pink-500 to-rose-500"
       />
       
-      <main className="p-4 sm:p-6 lg:p-8">
+      <main className="p-4 sm:p-6">
         <div className="max-w-4xl mx-auto">
-          <header className="text-center mb-8 sm:mb-10">
+          <header className="text-center mb-6 sm:mb-8">
             <div className="inline-block bg-white/90 backdrop-blur-lg rounded-3xl px-6 py-4 shadow-xl border-2 border-rose-200/50">
               <h1 className="text-2xl sm:text-3xl font-bold text-rose-800 mb-3">
                 Интерпретация результатов анализов крови
@@ -146,7 +146,7 @@ const LabAnalysisApp: React.FC<LabAnalysisAppProps> = ({ onBack }) => {
             </div>
           </header>
 
-          <div className="space-y-6">
+          <div className="space-y-4">
             {/* File Upload Section */}
             <section className="bg-gradient-to-br from-pink-50/95 to-rose-50/95 backdrop-blur-lg rounded-2xl shadow-lg border-2 border-rose-200/60 p-6 sm:p-8">
               <h2 className="text-xl sm:text-2xl font-semibold text-rose-800 mb-5">

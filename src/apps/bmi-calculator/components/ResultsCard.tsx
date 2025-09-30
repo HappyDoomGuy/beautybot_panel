@@ -26,9 +26,9 @@ const ResultsCard: React.FC<ResultsCardProps> = ({ results }) => {
   const bmiValueColorClass = getTextColorFromBgClass(results.bmiCategory.color);
 
   return (
-    <div className="bg-gradient-to-br from-pink-50/95 to-rose-50/95 backdrop-blur-lg p-8 rounded-2xl shadow-lg border-2 border-rose-200/60">
-      <h3 className="text-xl font-semibold text-rose-800 mb-8">Ваши результаты</h3>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div className="bg-gradient-to-br from-pink-50/95 to-rose-50/95 backdrop-blur-lg p-6 sm:p-8 rounded-2xl shadow-lg border-2 border-rose-200/60 overflow-hidden">
+      <h3 className="text-xl font-semibold text-rose-800 mb-6">Ваши результаты</h3>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
         <div className="p-5 rounded-xl text-center bg-white border border-rose-100">
           <p className="text-base text-gray-700 font-medium">Индекс Массы Тела (ИМТ)</p>
           <p className={`text-2xl font-bold ${bmiValueColorClass} mt-1`}>{results.bmi.toFixed(1)}</p>

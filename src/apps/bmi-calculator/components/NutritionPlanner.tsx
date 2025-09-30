@@ -79,8 +79,8 @@ const NutritionPlanner: React.FC<NutritionPlannerProps> = ({
   const actualCarbAndFatMax = Math.max(MIN_MACRO_PERCENTAGE, carbAndFatMaxBasedOnProtein);
 
   return (
-    <div className="bg-gradient-to-br from-pink-50/95 to-rose-50/95 backdrop-blur-lg p-8 rounded-2xl shadow-lg border-2 border-rose-200/60">
-      <h3 className="text-xl font-semibold text-rose-800 mb-6">Планировщик рациона</h3>
+    <div className="bg-gradient-to-br from-pink-50/95 to-rose-50/95 backdrop-blur-lg p-6 sm:p-8 rounded-2xl shadow-lg border-2 border-rose-200/60 overflow-hidden">
+      <h3 className="text-xl font-semibold text-rose-800 mb-5">Планировщик рациона</h3>
 
       <div className="mb-8">
         <label className="block text-base font-medium text-gray-700 mb-3">

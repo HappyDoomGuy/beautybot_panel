@@ -71,13 +71,13 @@ const HoroscopeApp: React.FC<HoroscopeAppProps> = ({ onBack }) => {
         gradient="from-pink-500 to-rose-500"
       />
       
-      <main className="flex-1 p-4 sm:p-6 lg:p-8">
+      <main className="flex-1 p-3 sm:p-4">
         <div className="max-w-4xl mx-auto h-full flex flex-col">
           {renderContent()}
         </div>
       </main>
       
-      <footer className="w-full text-center p-4 text-xs mt-auto">
+      <footer className="w-full text-center p-3 text-xs mt-auto">
         <div className="inline-block bg-white/80 backdrop-blur-md rounded-2xl px-4 py-2 shadow-lg border border-rose-200/50">
           <p className="text-gray-700">&copy; {new Date().getFullYear()} Beauty Panel. Все прогнозы созданы искусственным интеллектом.</p>
         </div>

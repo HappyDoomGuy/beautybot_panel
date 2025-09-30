@@ -554,7 +554,7 @@ disabled:hover:from-pink-400 disabled:hover:to-rose-400`;
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen overflow-x-hidden">
       <AppNavigation 
         title="Калькулятор ИМТ с ИИ" 
         onBack={onBack}
@@ -562,16 +562,16 @@ disabled:hover:from-pink-400 disabled:hover:to-rose-400`;
         gradient="from-pink-500 to-rose-500"
       />
       
-      <main className="container mx-auto p-6 md:p-12">
-        <header className="text-center mb-12 md:mb-16 relative">
-          <div className="inline-block bg-white/90 backdrop-blur-lg rounded-3xl px-6 py-4 shadow-xl border-2 border-rose-200/50">
-            <h1 className="text-3xl sm:text-4xl font-bold text-rose-800">Калории, белки, жиры, углеводы</h1>
-            <p className="text-gray-700 mt-3 text-base">Введите свои данные, чтобы рассчитать показатели, спланировать рацион и получить персональные рекомендации.</p>
+      <main className="container mx-auto p-4 md:p-6 max-w-full">
+        <header className="text-center mb-6 md:mb-8 relative">
+          <div className="inline-block bg-white/90 backdrop-blur-lg rounded-3xl px-6 py-4 shadow-xl border-2 border-rose-200/50 max-w-[90vw]">
+            <h1 className="text-3xl sm:text-4xl font-bold text-rose-800 break-words">Калории, белки, жиры, углеводы</h1>
+            <p className="text-gray-700 mt-3 text-base break-words">Введите свои данные, чтобы рассчитать показатели, спланировать рацион и получить персональные рекомендации.</p>
           </div>
         </header>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 md:gap-12">
-          <div className="lg:col-span-1 p-8 sm:p-10 rounded-2xl bg-gradient-to-br from-pink-50/95 to-rose-50/95 backdrop-blur-lg shadow-xl border-2 border-rose-200/60">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
+          <div className="lg:col-span-1 p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-pink-50/95 to-rose-50/95 backdrop-blur-lg shadow-xl border-2 border-rose-200/60">
             <h2 className="text-2xl font-semibold text-rose-800 mb-8">Ваши данные</h2>
             <InputControl
               label="Вес"
@@ -625,7 +625,7 @@ disabled:hover:from-pink-400 disabled:hover:to-rose-400`;
             />
           </div>
 
-          <div className="lg:col-span-2 space-y-10 md:space-y-12">
+          <div className="lg:col-span-2 space-y-6 md:space-y-8">
             {results ? (
               <>
                 <ResultsCard results={results} />
@@ -638,7 +638,7 @@ disabled:hover:from-pink-400 disabled:hover:to-rose-400`;
                 />
               </>
             ) : (
-              <div className="p-8 sm:p-10 rounded-2xl bg-gradient-to-br from-pink-50/95 to-rose-50/95 backdrop-blur-lg shadow-xl border-2 border-rose-200/60 text-center min-h-[300px] flex flex-col justify-center items-center">
+              <div className="p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-pink-50/95 to-rose-50/95 backdrop-blur-lg shadow-xl border-2 border-rose-200/60 text-center min-h-[300px] flex flex-col justify-center items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-20 h-20 text-rose-400 mb-6">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
                 </svg>
@@ -652,7 +652,7 @@ disabled:hover:from-pink-400 disabled:hover:to-rose-400`;
         </div>
 
         {/* AI Recommendation Section */}
-        <div className="mt-10 md:mt-12 p-8 sm:p-10 rounded-2xl bg-gradient-to-br from-pink-50/95 to-rose-50/95 backdrop-blur-lg shadow-xl border-2 border-rose-200/60">
+        <div className="mt-6 md:mt-8 p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-pink-50/95 to-rose-50/95 backdrop-blur-lg shadow-xl border-2 border-rose-200/60">
           <h2 className="text-2xl font-semibold text-rose-800 mb-6">
             Рекомендации от ИИ
           </h2>
@@ -702,10 +702,10 @@ disabled:hover:from-pink-400 disabled:hover:to-rose-400`;
                   </svg>
                 </button>
                 {isAiRecommendationExpanded && (
-                  <div className="mt-4 p-5 bg-white rounded-xl shadow-md border border-rose-200">
-                    <h3 className="text-lg font-semibold text-rose-700 mb-4">Ваши персональные рекомендации:</h3>
+                  <div className="mt-4 p-5 bg-white rounded-xl shadow-md border border-rose-200 overflow-hidden">
+                    <h3 className="text-lg font-semibold text-rose-700 mb-4 break-words">Ваши персональные рекомендации:</h3>
                     <div
-                      className="prose prose-sm sm:prose-base max-w-none ai-recommendation-content text-gray-800"
+                      className="prose prose-sm sm:prose-base max-w-none ai-recommendation-content text-gray-800 break-words overflow-x-auto"
                       dangerouslySetInnerHTML={{ __html: formatAIRecommendationHTML(aiRecommendation) }}
                     />
                   </div>
@@ -737,9 +737,9 @@ disabled:hover:from-pink-400 disabled:hover:to-rose-400`;
           </>
         </div>
 
-        <footer className="text-center mt-16 md:mt-20 py-8">
-          <div className="inline-block bg-white/85 backdrop-blur-lg rounded-2xl px-6 py-4 shadow-lg border-2 border-rose-200/50">
-            <p className="text-sm text-gray-700">
+        <footer className="text-center mt-8 md:mt-12 py-6">
+          <div className="inline-block bg-white/85 backdrop-blur-lg rounded-2xl px-6 py-4 shadow-lg border-2 border-rose-200/50 max-w-[90vw]">
+            <p className="text-sm text-gray-700 break-words">
               &copy; {new Date().getFullYear()} Beauty Panel. Все расчеты являются приблизительными и не заменяют консультацию специалиста. Рекомендации ИИ носят информационный характер.
             </p>
           </div>

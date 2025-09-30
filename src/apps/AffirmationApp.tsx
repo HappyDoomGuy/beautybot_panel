@@ -90,12 +90,12 @@ const AffirmationApp: React.FC<AffirmationAppProps> = ({ onBack }) => {
         gradient="from-pink-500 to-rose-500"
       />
       
-      <main className="flex-1 p-4 sm:p-6 pb-20">
-        <div className="max-w-2xl mx-auto space-y-6">
+      <main className="flex-1 p-3 sm:p-4 pb-4">
+        <div className="max-w-2xl mx-auto space-y-4">
           {/* Заголовок и прогресс */}
-          <div className="text-center space-y-4">
-            <div className="inline-block bg-white/90 backdrop-blur-lg rounded-3xl px-6 py-4 shadow-xl border-2 border-rose-200/50">
-              <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-pink-600 to-rose-600 bg-clip-text text-transparent">
+          <div className="text-center space-y-3">
+            <div className="inline-block bg-white/90 backdrop-blur-lg rounded-3xl px-5 py-3 shadow-xl border-2 border-rose-200/50">
+              <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-pink-600 to-rose-600 bg-clip-text text-transparent">
                 30-дневный челлендж красоты
               </h1>
             </div>
@@ -192,47 +192,48 @@ const AffirmationApp: React.FC<AffirmationAppProps> = ({ onBack }) => {
             </div>
           </div>
 
-          {/* Кнопка сброса */}
-          <div className="text-center">
+          {/* Кнопка сброса и футер в одной плашке */}
+          <div className="bg-white/85 backdrop-blur-lg rounded-2xl p-4 shadow-lg border-2 border-rose-200/50 space-y-3">
             {!showResetConfirm ? (
-              <div className="inline-block bg-white/85 backdrop-blur-md rounded-2xl px-4 py-2 shadow-md border border-rose-200/50">
-                <button
-                  onClick={() => setShowResetConfirm(true)}
-                  className="text-gray-600 hover:text-gray-800 text-sm underline transition-colors"
-                >
-                  Начать заново
-                </button>
-              </div>
+              <>
+                <div className="text-center">
+                  <button
+                    onClick={() => setShowResetConfirm(true)}
+                    className="text-gray-600 hover:text-gray-800 text-sm underline transition-colors"
+                  >
+                    Начать заново
+                  </button>
+                </div>
+                <div className="text-center border-t border-rose-200/50 pt-3">
+                  <p className="text-xs text-gray-700">&copy; {new Date().getFullYear()} Beauty Advice. Будьте прекрасны каждый день! 💖</p>
+                </div>
+              </>
             ) : (
-              <div className="bg-red-50/95 backdrop-blur-lg border-2 border-red-200 rounded-xl p-4 space-y-3 shadow-lg">
-                <p className="text-red-800 font-semibold">
-                  Вы уверены? Весь прогресс будет удален.
-                </p>
+              <>
+                <div className="bg-red-50 rounded-lg p-3">
+                  <p className="text-red-800 font-semibold text-sm text-center">
+                    Вы уверены? Весь прогресс будет удален.
+                  </p>
+                </div>
                 <div className="flex gap-3 justify-center">
                   <button
                     onClick={resetProgress}
-                    className="px-6 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg font-semibold transition-colors shadow-md"
+                    className="px-6 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg font-semibold transition-colors shadow-md text-sm"
                   >
                     Да, сбросить
                   </button>
                   <button
                     onClick={() => setShowResetConfirm(false)}
-                    className="px-6 py-2 bg-white/90 backdrop-blur-sm hover:bg-white text-gray-700 rounded-lg font-semibold transition-colors border border-gray-300 shadow-md"
+                    className="px-6 py-2 bg-white hover:bg-gray-50 text-gray-700 rounded-lg font-semibold transition-colors border border-gray-300 shadow-md text-sm"
                   >
                     Отмена
                   </button>
                 </div>
-              </div>
+              </>
             )}
           </div>
         </div>
       </main>
-
-      <footer className="w-full text-center p-4 text-xs">
-        <div className="inline-block bg-white/80 backdrop-blur-md rounded-2xl px-4 py-2 shadow-lg border border-rose-200/50">
-          <p className="text-gray-700">&copy; {new Date().getFullYear()} Beauty Advice. Будьте прекрасны каждый день! 💖</p>
-        </div>
-      </footer>
     </div>
   );
 };
