@@ -3,10 +3,17 @@ import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
 
-// Preload background image and other critical resources
+// Random background selection
+const backgroundImages = ['/hearts.jpg', '/image2.jpg'];
+const selectedBackground = backgroundImages[Math.floor(Math.random() * backgroundImages.length)];
+
+// Set CSS variable for background image
+document.documentElement.style.setProperty('--background-image', `url('${selectedBackground}')`);
+
+// Preload background images and other critical resources
 const preloadResources = () => {
   return new Promise((resolve) => {
-    const imagesToLoad: string[] = ['/hearts.jpg'];
+    const imagesToLoad: string[] = backgroundImages;
     let loadedCount = 0;
     const totalImages = imagesToLoad.length;
     

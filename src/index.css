@@ -27,7 +27,11 @@ input, textarea, [contenteditable] {
   user-select: text;
 }
 
-/* Фон с изображением hearts.jpg */
+/* Фон с рандомным изображением (hearts.jpg или image2.jpg) */
+:root {
+  --background-image: url('/hearts.jpg'); /* Значение по умолчанию, заменяется в main.tsx */
+}
+
 body {
   position: relative;
   min-height: 100vh;
@@ -42,7 +46,7 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background: url('/hearts.jpg') center/cover no-repeat fixed;
+  background: var(--background-image) center/cover no-repeat fixed;
   filter: brightness(0.82) saturate(0.8);
   z-index: -1;
 }
