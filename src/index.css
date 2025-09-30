@@ -2,6 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Telegram Web App optimizations */
+html, body {
+  /* Предотвращаем скролл страницы в Telegram */
+  overscroll-behavior: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Убираем выделение текста на мобильных устройствах */
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Разрешаем выделение текста только для интерактивных элементов */
+input, textarea, [contenteditable] {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
 /* Нежно розовый фон */
 body {
   background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%) !important;
@@ -179,6 +204,59 @@ nav {
   50% { transform: translateY(-10px); }
 }
 
+/* Нежная анимация появления с легким подъемом */
+@keyframes cardGentleRise {
+  0% {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+  }
+  60% {
+    opacity: 0.8;
+    transform: translateY(-5px) scale(1.01);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Элегантное появление с легким затуханием */
+@keyframes cardSoftFade {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.96);
+    filter: blur(3px);
+  }
+  70% {
+    opacity: 0.9;
+    filter: blur(0px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0px);
+  }
+}
+
+/* Плавное разворачивание (как лепесток) */
+@keyframes cardBloom {
+  0% {
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+    filter: blur(2px);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(0.98) translateY(5px);
+    filter: blur(1px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0px);
+  }
+}
+
 .animate-fade-in {
   animation: fadeIn 0.6s ease-out;
 }
@@ -189,6 +267,25 @@ nav {
 
 .animate-bounce-gentle {
   animation: bounceGentle 2s infinite;
+}
+
+/* Применяем плавные анимации к карточкам */
+.animate-card-entrance-1 {
+  animation: cardGentleRise 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation-delay: 0s;
+  opacity: 0;
+}
+
+.animate-card-entrance-2 {
+  animation: cardSoftFade 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation-delay: 0.2s;
+  opacity: 0;
+}
+
+.animate-card-entrance-3 {
+  animation: cardBloom 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation-delay: 0.4s;
+  opacity: 0;
 }
 
 /* Мобильная оптимизация */

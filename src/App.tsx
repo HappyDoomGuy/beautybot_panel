@@ -1,24 +1,58 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MainMenu } from './components/MainMenu';
 import { HoroscopeApp } from './apps/HoroscopeApp';
 import { LabAnalysisApp } from './apps/LabAnalysisApp';
 import { BMICalculatorApp } from './apps/BMICalculatorApp';
+import { useTelegram } from './hooks/useTelegram';
 
 export type AppType = 'home' | 'horoscope' | 'lab-analysis' | 'bmi-calculator';
 
 const App: React.FC = () => {
   const [currentApp, setCurrentApp] = useState<AppType>('home');
+  const { webApp, isTelegram, hapticFeedback } = useTelegram();
+
+  // Инициализация Telegram Web App
+  useEffect(() => {
+    if (isTelegram && webApp) {
+      try {
+        // Устанавливаем цвета темы Telegram
+        webApp.setHeaderColor('#fdf2f8'); // Нежно-розовый
+        webApp.setBackgroundColor('#ffffff'); // Белый
+        
+        // Включаем подтверждение закрытия
+        webApp.enableClosingConfirmation();
+        
+        console.log('Telegram Web App ready:', {
+          user: webApp.initDataUnsafe?.user,
+          theme: webApp.colorScheme,
+          version: webApp.version
+        });
+      } catch (error) {
+        console.error('Error configuring Telegram Web App:', error);
+      }
+    }
+  }, [isTelegram, webApp]);
+
+  const handleAppSelect = (app: AppType) => {
+    hapticFeedback.selection();
+    setCurrentApp(app);
+  };
+
+  const handleBack = () => {
+    hapticFeedback.impact('light');
+    setCurrentApp('home');
+  };
 
   const renderCurrentApp = () => {
     switch (currentApp) {
       case 'horoscope':
-        return <HoroscopeApp onBack={() => setCurrentApp('home')} />;
+        return <HoroscopeApp onBack={handleBack} />;
       case 'lab-analysis':
-        return <LabAnalysisApp onBack={() => setCurrentApp('home')} />;
+        return <LabAnalysisApp onBack={handleBack} />;
       case 'bmi-calculator':
-        return <BMICalculatorApp onBack={() => setCurrentApp('home')} />;
+        return <BMICalculatorApp onBack={handleBack} />;
       default:
-        return <MainMenu onAppSelect={setCurrentApp} />;
+        return <MainMenu onAppSelect={handleAppSelect} />;
     }
   };
 

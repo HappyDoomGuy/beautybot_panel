@@ -8,6 +8,9 @@
     <meta name="description" content="Комплексное приложение для красоты и здоровья: гороскоп красоты, анализ лабораторных исследований и калькулятор ИМТ с ИИ" />
     <meta name="theme-color" content="#ec4899" />
     <link rel="manifest" href="/manifest.json" />
+    
+    <!-- Telegram Web App API -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
       /* Custom CSS variables for consistent theming */
       :root {
@@ -67,5 +70,48 @@
       </div>
     </div>
     <script type="module" src="/src/main.tsx"></script>
+    
+    <!-- Telegram Web App Integration -->
+    <script>
+      function setThemeClass() {
+        if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+          Telegram.WebApp.expand();
+          Telegram.WebApp.viewportStableHeight = 100;
+
+          // Отключаем вертикальный свайп
+          if (Telegram.WebApp.disableVerticalSwipes) {
+            Telegram.WebApp.disableVerticalSwipes();
+          } else {
+            // Альтернативный метод для предотвращения закрытия при свайпе вниз
+            const overflow = 100;
+            document.body.style.overflowY = 'hidden';
+            document.body.style.marginTop = `${overflow}px`;
+            document.body.style.height = window.innerHeight + overflow + "px";
+            document.body.style.paddingBottom = `${overflow}px`;
+            window.scrollTo(0, overflow);
+
+            let ts;
+            const onTouchStart = (e) => {
+              ts = e.touches[0].clientY;
+            };
+            const onTouchMove = (e) => {
+              const scroll = document.body.scrollTop || document.documentElement.scrollTop;
+              const te = e.changedTouches[0].clientY;
+              if (scroll <= 0 && ts < te) {
+                e.preventDefault();
+              }
+            };
+            document.documentElement.addEventListener('touchstart', onTouchStart, { passive: false });
+            document.documentElement.addEventListener('touchmove', onTouchMove, { passive: false });
+          }
+        }
+      }
+
+      // Инициализация Telegram Web App
+      if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+        Telegram.WebApp.onEvent('themeChanged', setThemeClass);
+        setThemeClass();
+      }
+    </script>
   </body>
 </html>
