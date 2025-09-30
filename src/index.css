@@ -204,6 +204,25 @@ nav {
   50% { transform: translateY(-10px); }
 }
 
+/* Спокойная анимация иконок - объемное вращение с эффектом 3D */
+@keyframes iconGentleRotate {
+  0% {
+    transform: scale(1) rotateY(0deg);
+  }
+  50% {
+    transform: scale(1.15) rotateY(180deg);
+  }
+  100% {
+    transform: scale(1) rotateY(360deg);
+  }
+}
+
+/* Добавляем perspective для родительского элемента иконок */
+.icon-container {
+  perspective: 1000px;
+  display: inline-block;
+}
+
 /* Нежная анимация появления с легким подъемом */
 @keyframes cardGentleRise {
   0% {

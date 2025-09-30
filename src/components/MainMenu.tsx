@@ -14,6 +14,7 @@ const MainMenu: React.FC<MainMenuProps> = ({ onAppSelect }) => {
              title: 'Гороскоп красоты',
              description: 'Персональный гороскоп красоты на основе вашего знака зодиака',
              icon: '✨',
+             iconAnimation: 'group-hover:animate-[iconGentleRotate_3s_ease-in-out_infinite]',
              gradient: 'from-pink-300 to-rose-300',
              hoverGradient: 'from-pink-400 to-rose-400',
              bgColor: 'bg-white',
@@ -23,6 +24,7 @@ const MainMenu: React.FC<MainMenuProps> = ({ onAppSelect }) => {
              title: 'Лабораторные анализы',
              description: 'Расшифровка результатов анализов крови с помощью ИИ',
              icon: '🧪',
+             iconAnimation: 'group-hover:animate-[iconGentleRotate_3s_ease-in-out_infinite]',
              gradient: 'from-pink-300 to-rose-300',
              hoverGradient: 'from-pink-400 to-rose-400',
              bgColor: 'bg-white',
@@ -32,6 +34,7 @@ const MainMenu: React.FC<MainMenuProps> = ({ onAppSelect }) => {
              title: 'Калькулятор ИМТ с ИИ',
              description: 'Расчет ИМТ, планирование питания и персональные рекомендации',
              icon: '⚖️',
+             iconAnimation: 'group-hover:animate-[iconGentleRotate_3s_ease-in-out_infinite]',
              gradient: 'from-pink-300 to-rose-300',
              hoverGradient: 'from-pink-400 to-rose-400',
              bgColor: 'bg-white',
@@ -69,8 +72,10 @@ const MainMenu: React.FC<MainMenuProps> = ({ onAppSelect }) => {
                 {/* Main Content */}
                 <div className="flex-1">
                   {/* Icon */}
-                  <div className="text-5xl sm:text-6xl mb-3 sm:mb-4 group-hover:animate-bounce-gentle">
-                    {app.icon}
+                  <div className="icon-container mb-3 sm:mb-4">
+                    <div className={`text-5xl sm:text-6xl ${app.iconAnimation}`}>
+                      {app.icon}
+                    </div>
                   </div>
 
                   {/* Text Content */}
