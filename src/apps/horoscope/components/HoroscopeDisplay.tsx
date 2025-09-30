@@ -26,17 +26,17 @@ const HoroscopeDisplay: React.FC<HoroscopeDisplayProps> = ({ horoscopeData, zodi
 
       <div className="space-y-6">
           <div>
-              <h3 className="text-xl text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600 mb-3">{horoscopeData.title}</h3>
+              <h3 className="text-xl text-center text-gray-900 font-semibold mb-3">{horoscopeData.title}</h3>
               <div className="text-gray-700 dark:text-gray-300 leading-relaxed prose prose-sm sm:prose-base dark:prose-invert max-w-none">
                 <ReactMarkdown
                   components={{
                     h2: ({ children }) => (
-                      <h2 className="text-lg font-semibold text-purple-600 dark:text-purple-300 mt-6 mb-3">
+                      <h2 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
                         {children}
                       </h2>
                     ),
                     h3: ({ children }) => (
-                      <h3 className="text-base font-semibold text-purple-500 dark:text-purple-200 mt-4 mb-2">
+                      <h3 className="text-base font-semibold text-gray-800 mt-4 mb-2">
                         {children}
                       </h3>
                     ),
@@ -46,12 +46,12 @@ const HoroscopeDisplay: React.FC<HoroscopeDisplayProps> = ({ horoscopeData, zodi
                       </p>
                     ),
                     strong: ({ children }) => (
-                      <strong className="text-purple-700 dark:text-purple-200 font-semibold">
+                      <strong className="text-gray-900 font-semibold">
                         {children}
                       </strong>
                     ),
                     em: ({ children }) => (
-                      <em className="text-indigo-600 dark:text-indigo-300 italic">
+                      <em className="text-gray-700 italic">
                         {children}
                       </em>
                     ),

@@ -52,7 +52,7 @@ export const BannerCarousel: React.FC<BannerCarouselProps> = ({
   return (
     <div className="w-full">
       <div
-        className="relative w-full aspect-[2.5/1] bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700"
+        className="relative w-full aspect-[2.5/1] bg-white rounded-2xl overflow-hidden shadow-lg border border-rose-200"
         role="region"
         aria-roledescription="carousel"
         aria-label="Рекламные баннеры"
@@ -112,8 +112,8 @@ export const BannerCarousel: React.FC<BannerCarouselProps> = ({
               className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ease-in-out
                           focus:outline-none focus-visible:ring-1 focus-visible:ring-offset-1 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 focus-visible:ring-blue-500
                           ${index === currentIndex 
-                            ? 'bg-blue-500 scale-125' 
-                            : 'bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500'}`}
+                            ? 'bg-rose-500 scale-125' 
+                            : 'bg-gray-300 hover:bg-gray-400'}`}
               aria-label={`Перейти к баннеру ${index + 1}`}
               aria-selected={index === currentIndex}
               role="tab"

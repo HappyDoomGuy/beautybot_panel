@@ -20,7 +20,7 @@ const AppNavigation: React.FC<AppNavigationProps> = ({
           {/* Back Button */}
           <button
             onClick={onBack}
-            className="flex items-center space-x-2 text-rose-600 dark:text-rose-300 hover:text-rose-700 dark:hover:text-rose-200 transition-colors duration-200 group font-medium"
+            className="flex items-center space-x-2 text-gray-800 hover:text-gray-900 transition-colors duration-200 group font-medium"
           >
             <svg 
               className="w-6 h-6 transition-transform duration-200 group-hover:-translate-x-1" 
@@ -36,7 +36,7 @@ const AppNavigation: React.FC<AppNavigationProps> = ({
           {/* Title */}
           <div className="flex items-center space-x-3">
             <div className="text-2xl">{icon}</div>
-            <h1 className="text-lg sm:text-xl font-bold text-rose-800 dark:text-rose-200">
+            <h1 className="text-lg sm:text-xl font-bold text-gray-800">
               {title}
             </h1>
           </div>

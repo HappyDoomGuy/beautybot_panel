@@ -2,49 +2,73 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Простой белый фон */
+/* Нежно розовый фон */
 body {
-  background: #ffffff !important;
+  background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%) !important;
   min-height: 100vh;
   font-family: system-ui, -apple-system, sans-serif;
   color: #333333;
 }
 
-/* Принудительно белый фон */
+/* Принудительно розовый фон */
 @media (prefers-color-scheme: dark) {
   body {
-    background: #ffffff !important;
+    background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%) !important;
     color: #333333;
   }
 }
 
 /* Стили для карточек */
 .app-card {
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(10px);
+  background: #ffffff;
   border-radius: 24px;
-  border: 1px solid rgba(251, 113, 133, 0.3);
-  box-shadow: 0 20px 40px rgba(251, 113, 133, 0.1);
-  transition: all 0.3s ease;
+  border: 1px solid rgba(251, 113, 133, 0.2);
+  box-shadow: 
+    0 8px 16px -4px rgba(251, 113, 133, 0.2),
+    0 4px 8px -2px rgba(251, 113, 133, 0.15),
+    0 2px 4px -1px rgba(251, 113, 133, 0.1),
+    0 20px 40px -8px rgba(251, 113, 133, 0.15),
+    0 0 0 1px rgba(251, 113, 133, 0.05);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  transform: translateY(0);
 }
 
 .app-card:hover {
-  transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 30px 60px rgba(251, 113, 133, 0.2);
-  border-color: rgba(251, 113, 133, 0.5);
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 
+    0 16px 32px -8px rgba(251, 113, 133, 0.3),
+    0 8px 16px -4px rgba(251, 113, 133, 0.25),
+    0 4px 8px -2px rgba(251, 113, 133, 0.2),
+    0 40px 80px -16px rgba(251, 113, 133, 0.3),
+    0 0 0 1px rgba(251, 113, 133, 0.15);
+  border-color: rgba(251, 113, 133, 0.4);
+  background: #ffffff;
 }
 
 /* Темная тема для карточек */
 @media (prefers-color-scheme: dark) {
   .app-card {
-    background: rgba(136, 19, 55, 0.8);
-    border-color: rgba(251, 113, 133, 0.4);
-    box-shadow: 0 20px 40px rgba(136, 19, 55, 0.3);
+    background: #ffffff;
+    border-color: rgba(251, 113, 133, 0.2);
+    box-shadow: 
+      0 8px 16px -4px rgba(251, 113, 133, 0.2),
+      0 4px 8px -2px rgba(251, 113, 133, 0.15),
+      0 2px 4px -1px rgba(251, 113, 133, 0.1),
+      0 20px 40px -8px rgba(251, 113, 133, 0.15),
+      0 0 0 1px rgba(251, 113, 133, 0.05);
   }
   
   .app-card:hover {
-    box-shadow: 0 30px 60px rgba(136, 19, 55, 0.4);
-    border-color: rgba(251, 113, 133, 0.6);
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 
+      0 16px 32px -8px rgba(251, 113, 133, 0.3),
+      0 8px 16px -4px rgba(251, 113, 133, 0.25),
+      0 4px 8px -2px rgba(251, 113, 133, 0.2),
+      0 40px 80px -16px rgba(251, 113, 133, 0.3),
+      0 0 0 1px rgba(251, 113, 133, 0.15);
+    border-color: rgba(251, 113, 133, 0.4);
+    background: #ffffff;
   }
 }
 
@@ -100,25 +124,27 @@ body {
 .heading-primary {
   font-size: 3rem;
   font-weight: 800;
-  background: linear-gradient(135deg, #ec4899, #f43f5e);
+  background: linear-gradient(135deg, #be185d, #dc2626);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   text-align: center;
   margin-bottom: 1rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .heading-secondary {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #881337;
+  color: #be185d;
   margin-bottom: 0.5rem;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 /* Темная тема для заголовков */
 @media (prefers-color-scheme: dark) {
   .heading-secondary {
-    color: #fce7f3;
+    color: #be185d;
   }
 }
 
@@ -201,4 +227,36 @@ nav {
     margin: 0.25rem;
     padding: 0.75rem;
   }
+}
+
+/* Стили для кнопок в карточках */
+.app-card button {
+  position: relative;
+  z-index: 10;
+  box-shadow: 
+    0 4px 8px rgba(236, 72, 153, 0.25),
+    0 2px 4px rgba(236, 72, 153, 0.2),
+    0 1px 2px rgba(236, 72, 153, 0.15),
+    0 8px 16px rgba(236, 72, 153, 0.2),
+    0 0 0 1px rgba(236, 72, 153, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(0);
+}
+
+.app-card button:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 
+    0 8px 16px rgba(236, 72, 153, 0.35),
+    0 4px 8px rgba(236, 72, 153, 0.3),
+    0 2px 4px rgba(236, 72, 153, 0.25),
+    0 16px 32px rgba(236, 72, 153, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.3);
+}
+
+.app-card button:active {
+  transform: translateY(0) scale(1.02);
+  box-shadow: 
+    0 2px 4px rgba(236, 72, 153, 0.25),
+    0 1px 2px rgba(236, 72, 153, 0.2),
+    0 4px 8px rgba(236, 72, 153, 0.2);
 }
