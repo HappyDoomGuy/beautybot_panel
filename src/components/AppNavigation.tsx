@@ -11,16 +11,16 @@ const AppNavigation: React.FC<AppNavigationProps> = ({
   title, 
   onBack, 
   icon = '🏠',
-  gradient = 'from-purple-500 to-pink-500'
+  gradient = 'from-rose-500 to-blush-500'
 }) => {
   return (
-    <nav className="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700">
+    <nav className="sticky top-0 z-50 bg-white/90 dark:bg-rose-900/90 backdrop-blur-lg border-b border-rose-200/50 dark:border-rose-700/50 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Back Button */}
           <button
             onClick={onBack}
-            className="flex items-center space-x-2 text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-200 group"
+            className="flex items-center space-x-2 text-rose-600 dark:text-rose-300 hover:text-rose-700 dark:hover:text-rose-200 transition-colors duration-200 group font-medium"
           >
             <svg 
               className="w-6 h-6 transition-transform duration-200 group-hover:-translate-x-1" 
@@ -36,7 +36,7 @@ const AppNavigation: React.FC<AppNavigationProps> = ({
           {/* Title */}
           <div className="flex items-center space-x-3">
             <div className="text-2xl">{icon}</div>
-            <h1 className="text-lg sm:text-xl font-semibold text-gray-800 dark:text-gray-200">
+            <h1 className="text-lg sm:text-xl font-bold text-rose-800 dark:text-rose-200">
               {title}
             </h1>
           </div>

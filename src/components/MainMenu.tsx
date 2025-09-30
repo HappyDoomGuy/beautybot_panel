@@ -7,33 +7,33 @@ interface MainMenuProps {
 
 const MainMenu: React.FC<MainMenuProps> = ({ onAppSelect }) => {
   const apps = [
-    {
-      id: 'horoscope' as AppType,
-      title: 'Гороскоп красоты',
-      description: 'Персональный гороскоп красоты на основе вашего знака зодиака',
-      icon: '✨',
-      gradient: 'from-purple-400 to-pink-400',
-      hoverGradient: 'from-purple-500 to-pink-500',
-      bgColor: 'bg-gradient-to-br from-purple-100 to-pink-100 dark:from-purple-900/20 dark:to-pink-900/20',
-    },
-    {
-      id: 'lab-analysis' as AppType,
-      title: 'Лабораторные анализы',
-      description: 'Расшифровка результатов анализов крови с помощью ИИ',
-      icon: '🧪',
-      gradient: 'from-green-400 to-blue-400',
-      hoverGradient: 'from-green-500 to-blue-500',
-      bgColor: 'bg-gradient-to-br from-green-100 to-blue-100 dark:from-green-900/20 dark:to-blue-900/20',
-    },
-    {
-      id: 'bmi-calculator' as AppType,
-      title: 'Калькулятор ИМТ с ИИ',
-      description: 'Расчет ИМТ, планирование питания и персональные рекомендации',
-      icon: '⚖️',
-      gradient: 'from-yellow-400 to-orange-400',
-      hoverGradient: 'from-yellow-500 to-orange-500',
-      bgColor: 'bg-gradient-to-br from-yellow-100 to-orange-100 dark:from-yellow-900/20 dark:to-orange-900/20',
-    },
+           {
+             id: 'horoscope' as AppType,
+             title: 'Гороскоп красоты',
+             description: 'Персональный гороскоп красоты на основе вашего знака зодиака',
+             icon: '✨',
+             gradient: 'from-pink-400 to-rose-400',
+             hoverGradient: 'from-pink-500 to-rose-500',
+             bgColor: 'bg-gradient-to-br from-pink-200 via-rose-200 to-pink-300',
+           },
+           {
+             id: 'lab-analysis' as AppType,
+             title: 'Лабораторные анализы',
+             description: 'Расшифровка результатов анализов крови с помощью ИИ',
+             icon: '🧪',
+             gradient: 'from-pink-400 to-rose-400',
+             hoverGradient: 'from-pink-500 to-rose-500',
+             bgColor: 'bg-gradient-to-br from-rose-200 via-pink-200 to-rose-300',
+           },
+           {
+             id: 'bmi-calculator' as AppType,
+             title: 'Калькулятор ИМТ с ИИ',
+             description: 'Расчет ИМТ, планирование питания и персональные рекомендации',
+             icon: '⚖️',
+             gradient: 'from-pink-400 to-rose-400',
+             hoverGradient: 'from-pink-500 to-rose-500',
+             bgColor: 'bg-gradient-to-br from-pink-200 via-rose-200 to-pink-300',
+           },
   ];
 
   return (
@@ -44,7 +44,7 @@ const MainMenu: React.FC<MainMenuProps> = ({ onAppSelect }) => {
           <h1 className="heading-primary mb-4">
             Beauty Panel
           </h1>
-          <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+          <p className="text-lg sm:text-xl text-rose-700 dark:text-rose-300 max-w-2xl mx-auto font-medium">
             Комплексное приложение для красоты и здоровья
           </p>
         </div>
@@ -78,7 +78,7 @@ const MainMenu: React.FC<MainMenuProps> = ({ onAppSelect }) => {
                     {app.title}
                   </h2>
                   
-                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                  <p className="text-rose-700 dark:text-rose-300 leading-relaxed font-medium">
                     {app.description}
                   </p>
 
@@ -113,7 +113,7 @@ const MainMenu: React.FC<MainMenuProps> = ({ onAppSelect }) => {
 
       {/* Footer */}
       <footer className="mt-16 sm:mt-20 text-center">
-        <div className="text-gray-500 dark:text-gray-400 text-sm">
+        <div className="text-rose-600 dark:text-rose-400 text-sm font-medium">
           <p>&copy; {new Date().getFullYear()} Beauty Panel. Все рекомендации носят информационный характер.</p>
         </div>
       </footer>
