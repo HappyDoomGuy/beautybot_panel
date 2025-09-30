@@ -117,22 +117,22 @@ const LoadingSpinner: React.FC = () => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center space-y-4">
+    <div className="flex flex-col items-center justify-center space-y-4 min-h-[calc(100vh-200px)]">
       <div className="relative w-24 h-24">
         {/* Outer pulsating glow */}
-        <div className="absolute inset-0 rounded-full bg-purple-500 opacity-50 animate-ping"></div>
+        <div className="absolute inset-0 rounded-full bg-rose-500 opacity-50 animate-ping"></div>
         
         {/* Main rotating circle with gradient */}
-        <div className="w-full h-full rounded-full border-4 border-t-purple-400 border-r-purple-400 border-b-indigo-500 border-l-indigo-500 animate-spin"></div>
+        <div className="w-full h-full rounded-full border-4 border-t-rose-400 border-r-rose-400 border-b-pink-500 border-l-pink-500 animate-spin"></div>
 
         {/* Inner static icon */}
         <div className="absolute inset-0 flex items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="relative top-0.5 h-12 w-12 text-indigo-500 animate-pulse">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="relative top-0.5 h-12 w-12 text-rose-500 animate-pulse">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456Z" />
             </svg>
         </div>
       </div>
-      <p className="text-lg text-gray-600 dark:text-gray-300 tracking-wider animate-pulse min-h-[2rem] flex items-center justify-center text-center px-4">
+      <p className="text-lg text-gray-700 tracking-wider animate-pulse min-h-[2rem] flex items-center justify-center text-center px-4">
         {loadingMessages[currentMessage]}
       </p>
     </div>

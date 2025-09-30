@@ -88,14 +88,7 @@ const MainMenu: React.FC<MainMenuProps> = ({ onAppSelect }) => {
                 <div className="flex justify-end mt-6">
                   <button
                     onClick={() => onAppSelect(app.id)}
-                    className={`
-                      inline-flex items-center px-6 py-3 rounded-xl
-                      bg-gradient-to-r ${app.gradient}
-                      hover:bg-gradient-to-r hover:${app.hoverGradient}
-                      text-white font-semibold
-                      transition-all duration-300
-                      whitespace-nowrap
-                    `}
+                    className="inline-flex items-center px-6 py-3 rounded-xl bg-gradient-to-r from-pink-400 to-rose-400 hover:bg-gradient-to-r hover:from-pink-300 hover:to-rose-300 text-white font-semibold transition-all duration-300 whitespace-nowrap"
                   >
                     Открыть
                     <svg 

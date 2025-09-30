@@ -20,7 +20,7 @@ const ZodiacSelector: React.FC<ZodiacSelectorProps> = ({ onSelect, zodiacSigns }
                 <button
                     key={sign.name}
                     onClick={() => onSelect(sign)}
-                    className="group flex flex-col items-center p-4 bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 hover:border-purple-500 hover:bg-purple-50 dark:hover:bg-purple-900/30 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-purple-400 transform hover:-translate-y-1 shadow-lg hover:shadow-xl"
+                    className="group flex flex-col items-center p-4 bg-gradient-to-br from-pink-100 to-rose-100 rounded-2xl border-2 border-rose-400 hover:border-rose-500 hover:from-pink-200 hover:to-rose-200 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-rose-500 transform hover:-translate-y-1 shadow-lg hover:shadow-xl"
                 >
                     <span className="text-4xl sm:text-5xl mb-2 group-hover:scale-110 transition-transform duration-300">
                         {sign.symbol}

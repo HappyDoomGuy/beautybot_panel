@@ -63,21 +63,21 @@ const HoroscopeApp: React.FC<HoroscopeAppProps> = ({ onBack }) => {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-white flex flex-col">
       <AppNavigation 
         title="Гороскоп красоты" 
         onBack={onBack}
         icon="✨"
-        gradient="from-purple-500 to-pink-500"
+        gradient="from-pink-500 to-rose-500"
       />
       
-      <main className="p-4 sm:p-6 lg:p-8">
-        <div className="max-w-4xl mx-auto">
+      <main className="flex-1 p-4 sm:p-6 lg:p-8">
+        <div className="max-w-4xl mx-auto h-full flex flex-col">
           {renderContent()}
         </div>
       </main>
       
-      <footer className="w-full text-center p-4 text-xs text-gray-500 dark:text-gray-400">
+      <footer className="w-full text-center p-4 text-xs text-gray-500 dark:text-gray-400 mt-auto">
         <p>&copy; {new Date().getFullYear()} Beauty Panel. Все прогнозы созданы искусственным интеллектом.</p>
       </footer>
     </div>
