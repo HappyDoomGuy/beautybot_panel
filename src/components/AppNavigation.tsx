@@ -34,8 +34,7 @@ const AppNavigation: React.FC<AppNavigationProps> = ({
           </button>
 
           {/* Title */}
-          <div className="flex items-center space-x-2 sm:space-x-3 flex-1 justify-center px-2">
-            <div className="text-xl sm:text-2xl flex-shrink-0">{icon}</div>
+          <div className="flex items-center flex-1 justify-center px-2">
             <h1 className="text-base sm:text-lg md:text-xl font-bold text-gray-800 truncate">
               {title}
             </h1>

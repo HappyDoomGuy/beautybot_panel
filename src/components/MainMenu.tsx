@@ -47,8 +47,8 @@ const MainMenu: React.FC<MainMenuProps> = ({ onAppSelect }) => {
     <div className="min-h-screen p-4 sm:p-6 lg:p-8 flex items-center justify-center">
 
             {/* Apps Cards - Vertical Stack */}
-            <main className="max-w-md mx-auto">
-              <div className="space-y-4">
+            <main className="max-w-sm mx-auto">
+              <div className="space-y-3">
                 {apps.map((app, index) => (
                   <div
                     key={app.id}
@@ -56,7 +56,7 @@ const MainMenu: React.FC<MainMenuProps> = ({ onAppSelect }) => {
                   >
                     <div 
                       className={`
-                        w-full h-32 p-6 shadow-lg
+                        w-full h-28 p-5 shadow-lg
                         ${app.colorClass} hover:${app.hoverColor}
                         group cursor-pointer
                         transition-all duration-300
@@ -71,10 +71,10 @@ const MainMenu: React.FC<MainMenuProps> = ({ onAppSelect }) => {
                     >
                       {/* Title and Description */}
                       <div className="text-center">
-                        <h2 className={`text-lg font-bold ${app.textColor} mb-1`}>
+                        <h2 className={`text-lg font-bold ${app.textColor} mb-1 ${app.textColor === 'text-white' ? 'text-shadow-crisp' : ''}`}>
                           {app.title}
                         </h2>
-                        <p className={`text-sm ${app.textColor} opacity-80 leading-relaxed`}>
+                        <p className={`text-sm ${app.textColor} opacity-80 leading-relaxed ${app.textColor === 'text-white' ? 'text-shadow-crisp' : ''}`}>
                           {app.description}
                         </p>
                       </div>

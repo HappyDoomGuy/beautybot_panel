@@ -29,17 +29,47 @@ input, textarea, [contenteditable] {
 
 /* Фон с изображением hearts.jpg */
 body {
-  background: url('/hearts.jpg') center/cover no-repeat fixed, linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%) !important;
+  position: relative;
   min-height: 100vh;
   font-family: system-ui, -apple-system, sans-serif;
   color: #333333;
 }
 
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('/hearts.jpg') center/cover no-repeat fixed;
+  filter: brightness(0.82) saturate(0.8);
+  z-index: -1;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(80, 20, 40, 0.25), rgba(100, 30, 50, 0.25));
+  z-index: -1;
+}
+
 /* Принудительно фон с hearts.jpg */
 @media (prefers-color-scheme: dark) {
   body {
-    background: url('/hearts.jpg') center/cover no-repeat fixed, linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%) !important;
     color: #333333;
+  }
+  
+  body::before {
+    filter: brightness(0.82) saturate(0.8);
+  }
+  
+  body::after {
+    background: linear-gradient(135deg, rgba(80, 20, 40, 0.25), rgba(100, 30, 50, 0.25));
   }
 }
 
@@ -261,18 +291,31 @@ nav {
 @keyframes cardBloom {
   0% {
     opacity: 0;
-    transform: scale(0.9) translateY(20px);
-    filter: blur(2px);
+    transform: scale(0.9) translateY(20px) translateZ(0);
   }
   50% {
     opacity: 0.6;
-    transform: scale(0.98) translateY(5px);
-    filter: blur(1px);
+    transform: scale(0.98) translateY(5px) translateZ(0);
   }
   100% {
     opacity: 1;
-    transform: scale(1) translateY(0);
-    filter: blur(0px);
+    transform: scale(1) translateY(0) translateZ(0);
+  }
+}
+
+/* Плавное скольжение с легким поворотом */
+@keyframes cardGlide {
+  0% {
+    opacity: 0;
+    transform: translateY(35px) translateX(-10px) scale(0.94) translateZ(0);
+  }
+  60% {
+    opacity: 0.7;
+    transform: translateY(3px) translateX(2px) scale(1.005) translateZ(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) translateX(0) scale(1) translateZ(0);
   }
 }
 
@@ -305,6 +348,32 @@ nav {
   animation: cardBloom 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
   animation-delay: 0.4s;
   opacity: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
+.animate-card-entrance-4 {
+  animation: cardGlide 0.95s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation-delay: 0.6s;
+  opacity: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
+/* Четкий белый текст на цветном фоне */
+.text-shadow-crisp {
+  text-shadow: 
+    0 1px 2px rgba(0, 0, 0, 0.4),
+    0 2px 4px rgba(0, 0, 0, 0.3),
+    0 0 1px rgba(0, 0, 0, 0.5);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 600;
+  letter-spacing: 0.02em;
 }
 
 /* Мобильная оптимизация */
