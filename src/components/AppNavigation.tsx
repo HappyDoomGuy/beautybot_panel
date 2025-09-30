@@ -14,7 +14,7 @@ const AppNavigation: React.FC<AppNavigationProps> = ({
   gradient = 'from-rose-500 to-blush-500'
 }) => {
   return (
-    <nav className="sticky top-0 z-50 bg-gradient-to-r from-pink-100 to-rose-100 border-b border-rose-200 shadow-lg">
+    <nav className="sticky top-0 z-50 bg-white/85 backdrop-blur-lg border-b border-rose-200/60 shadow-lg">
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-14 sm:h-16">
           {/* Back Button */}

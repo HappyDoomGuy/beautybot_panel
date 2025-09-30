@@ -10,17 +10,19 @@ const ZodiacSelector: React.FC<ZodiacSelectorProps> = ({ onSelect, zodiacSigns }
   return (
     <div className="w-full animate-fade-in">
         <div className="text-center mb-8">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
-                Выберите свой знак зодиака
-            </h2>
-            <p className="text-gray-700">Чтобы получить свой персональный гороскоп на сегодня.</p>
+            <div className="inline-block bg-white/90 backdrop-blur-lg rounded-3xl px-6 py-4 shadow-xl border-2 border-rose-200/50">
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
+                    Выберите свой знак зодиака
+                </h2>
+                <p className="text-gray-700">Чтобы получить свой персональный гороскоп на сегодня.</p>
+            </div>
         </div>
         <div className="grid grid-cols-3 sm:grid-cols-4 gap-4 md:gap-6">
             {zodiacSigns.map((sign) => (
                 <button
                     key={sign.name}
                     onClick={() => onSelect(sign)}
-                    className="group flex flex-col items-center p-4 bg-gradient-to-br from-pink-100 to-rose-100 rounded-2xl border-2 border-rose-400 hover:border-rose-500 hover:from-pink-200 hover:to-rose-200 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-rose-500 transform hover:-translate-y-1 shadow-lg hover:shadow-xl"
+                    className="group flex flex-col items-center p-4 bg-gradient-to-br from-pink-100/95 to-rose-100/95 backdrop-blur-md rounded-2xl border-2 border-rose-400 hover:border-rose-500 hover:from-pink-200/95 hover:to-rose-200/95 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-rose-500 transform hover:-translate-y-1 shadow-lg hover:shadow-xl"
                 >
                     <span className="text-4xl sm:text-5xl mb-2 group-hover:scale-110 transition-transform duration-300">
                         {sign.symbol}

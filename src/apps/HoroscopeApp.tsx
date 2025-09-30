@@ -45,11 +45,11 @@ const HoroscopeApp: React.FC<HoroscopeAppProps> = ({ onBack }) => {
     }
     if (error) {
       return (
-          <div className="text-center text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 p-6 rounded-lg">
-              <p>{error}</p>
+          <div className="text-center bg-red-50/95 backdrop-blur-lg p-6 rounded-2xl shadow-lg border-2 border-red-200/60">
+              <p className="text-red-700 font-medium mb-4">{error}</p>
               <button
                   onClick={handleReset}
-                  className="mt-4 px-6 py-2 bg-indigo-500 text-white font-semibold rounded-full hover:bg-indigo-400 transition-colors duration-300"
+                  className="mt-4 px-6 py-3 bg-gradient-to-r from-pink-400 to-rose-400 text-white font-semibold rounded-xl hover:from-pink-300 hover:to-rose-300 transition-all duration-300 shadow-md"
               >
                   Попробовать снова
               </button>
@@ -63,7 +63,7 @@ const HoroscopeApp: React.FC<HoroscopeAppProps> = ({ onBack }) => {
   };
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
+    <div className="min-h-screen flex flex-col">
       <AppNavigation 
         title="Гороскоп красоты" 
         onBack={onBack}
@@ -77,8 +77,10 @@ const HoroscopeApp: React.FC<HoroscopeAppProps> = ({ onBack }) => {
         </div>
       </main>
       
-      <footer className="w-full text-center p-4 text-xs text-gray-500 dark:text-gray-400 mt-auto">
-        <p>&copy; {new Date().getFullYear()} Beauty Panel. Все прогнозы созданы искусственным интеллектом.</p>
+      <footer className="w-full text-center p-4 text-xs mt-auto">
+        <div className="inline-block bg-white/80 backdrop-blur-md rounded-2xl px-4 py-2 shadow-lg border border-rose-200/50">
+          <p className="text-gray-700">&copy; {new Date().getFullYear()} Beauty Panel. Все прогнозы созданы искусственным интеллектом.</p>
+        </div>
       </footer>
     </div>
   );

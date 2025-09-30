@@ -3,7 +3,7 @@ import { AlertTriangleIcon } from './Icons';
 
 export const Disclaimer: React.FC = () => {
   return (
-    <div className="bg-rose-50 p-4 sm:p-5 rounded-xl border border-rose-200">
+    <div className="bg-rose-50/90 backdrop-blur-md p-4 sm:p-5 rounded-xl border border-rose-200/60">
       <div className="flex items-start">
         <AlertTriangleIcon className="w-7 h-7 sm:w-8 sm:h-8 mr-3 text-rose-600 flex-shrink-0 mt-0.5" />
         <div>

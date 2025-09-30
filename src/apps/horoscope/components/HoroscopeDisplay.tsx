@@ -9,7 +9,7 @@ interface HoroscopeDisplayProps {
 }
 
 const InfoPanel: React.FC<{ label: string; value: string | number }> = ({ label, value }) => (
-    <div className="flex flex-col items-center justify-center bg-gradient-to-br from-pink-100 to-rose-100 rounded-lg p-4 border-2 border-rose-200">
+    <div className="flex flex-col items-center justify-center bg-gradient-to-br from-pink-100/90 to-rose-100/90 backdrop-blur-sm rounded-lg p-4 border-2 border-rose-200/70">
         <p className="text-xs text-rose-600 uppercase tracking-wider font-semibold">{label}</p>
         <p className="text-2xl font-bold text-rose-800 mt-1">{value}</p>
     </div>
@@ -17,7 +17,7 @@ const InfoPanel: React.FC<{ label: string; value: string | number }> = ({ label,
 
 const HoroscopeDisplay: React.FC<HoroscopeDisplayProps> = ({ horoscopeData, zodiacSignData, onReset }) => {
   return (
-    <div className="w-full max-w-2xl bg-gradient-to-br from-pink-50 to-rose-50 rounded-3xl border-2 border-rose-200 shadow-2xl p-6 md:p-8 animate-fade-in-up">
+    <div className="w-full max-w-2xl bg-gradient-to-br from-pink-50/95 to-rose-50/95 backdrop-blur-lg rounded-3xl border-2 border-rose-200/60 shadow-2xl p-6 md:p-8 animate-fade-in-up">
       <div className="text-center mb-6">
           <div className="mx-auto text-6xl mb-2 text-yellow-500">{zodiacSignData.symbol}</div>
           <h2 className="text-3xl font-bold text-rose-700">{zodiacSignData.name}</h2>

@@ -125,7 +125,7 @@ const LabAnalysisApp: React.FC<LabAnalysisAppProps> = ({ onBack }) => {
   );
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen">
       <AppNavigation 
         title="Лабораторные анализы" 
         onBack={onBack}
@@ -136,17 +136,19 @@ const LabAnalysisApp: React.FC<LabAnalysisAppProps> = ({ onBack }) => {
       <main className="p-4 sm:p-6 lg:p-8">
         <div className="max-w-4xl mx-auto">
           <header className="text-center mb-8 sm:mb-10">
-            <h1 className="text-2xl sm:text-3xl font-bold text-rose-800 mb-3">
-              Интерпретация результатов анализов крови
-            </h1>
-            <p className="text-gray-700">
-              Загрузите ваш анализ для расшифровки при помощи ИИ.
-            </p>
+            <div className="inline-block bg-white/90 backdrop-blur-lg rounded-3xl px-6 py-4 shadow-xl border-2 border-rose-200/50">
+              <h1 className="text-2xl sm:text-3xl font-bold text-rose-800 mb-3">
+                Интерпретация результатов анализов крови
+              </h1>
+              <p className="text-gray-700">
+                Загрузите ваш анализ для расшифровки при помощи ИИ.
+              </p>
+            </div>
           </header>
 
           <div className="space-y-6">
             {/* File Upload Section */}
-            <section className="bg-gradient-to-br from-pink-50 to-rose-50 rounded-2xl shadow-lg border-2 border-rose-200 p-6 sm:p-8">
+            <section className="bg-gradient-to-br from-pink-50/95 to-rose-50/95 backdrop-blur-lg rounded-2xl shadow-lg border-2 border-rose-200/60 p-6 sm:p-8">
               <h2 className="text-xl sm:text-2xl font-semibold text-rose-800 mb-5">
                 Загрузите файл анализов
               </h2>
@@ -189,7 +191,7 @@ const LabAnalysisApp: React.FC<LabAnalysisAppProps> = ({ onBack }) => {
 
             {/* File Preview */}
             <ConditionalSection isVisible={!!selectedFile}>
-              <div className="bg-pink-50 p-4 sm:p-5 rounded-xl border border-rose-200">
+              <div className="bg-pink-50/90 backdrop-blur-md p-4 sm:p-5 rounded-xl border border-rose-200/60">
                 <h2 className="font-semibold text-gray-800 mb-3 sr-only">
                   Предпросмотр файла
                 </h2>
@@ -226,7 +228,7 @@ const LabAnalysisApp: React.FC<LabAnalysisAppProps> = ({ onBack }) => {
 
             {/* Error Display */}
             <ConditionalSection isVisible={!!error}>
-              <div role="alert" className="bg-rose-50 p-4 sm:p-5 rounded-xl border border-rose-200 flex items-start">
+              <div role="alert" className="bg-rose-50/90 backdrop-blur-md p-4 sm:p-5 rounded-xl border border-rose-200/60 flex items-start">
                 <AlertTriangleIcon className="w-6 h-6 mr-3 text-rose-600 flex-shrink-0 mt-1" />
                 <div>
                   <strong className="font-bold text-rose-800 block">Ошибка:</strong>
@@ -237,7 +239,7 @@ const LabAnalysisApp: React.FC<LabAnalysisAppProps> = ({ onBack }) => {
 
             {/* Analysis Results */}
             <ConditionalSection isVisible={!!analysisResult && !isLoading}>
-              <div className="bg-gradient-to-br from-pink-50 to-rose-50 p-4 sm:p-5 rounded-xl border-2 border-rose-200 shadow-lg">
+              <div className="bg-gradient-to-br from-pink-50/95 to-rose-50/95 backdrop-blur-lg p-4 sm:p-5 rounded-xl border-2 border-rose-200/60 shadow-lg">
                 <h2 className="text-xl sm:text-2xl font-semibold text-rose-800 mb-4">
                   Результаты интерпретации
                 </h2>
@@ -252,8 +254,10 @@ const LabAnalysisApp: React.FC<LabAnalysisAppProps> = ({ onBack }) => {
         </div>
       </main>
 
-      <footer className="w-full text-center p-4 text-xs text-gray-500 dark:text-gray-400">
-        <p>&copy; {new Date().getFullYear()} Beauty Panel. Результаты не являются диагнозом.</p>
+      <footer className="w-full text-center p-4 text-xs">
+        <div className="inline-block bg-white/80 backdrop-blur-md rounded-2xl px-4 py-2 shadow-lg border border-rose-200/50">
+          <p className="text-gray-700">&copy; {new Date().getFullYear()} Beauty Panel. Результаты не являются диагнозом.</p>
+        </div>
       </footer>
     </div>
   );

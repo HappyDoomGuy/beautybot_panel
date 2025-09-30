@@ -63,10 +63,10 @@ const AffirmationApp: React.FC<AffirmationAppProps> = ({ onBack }) => {
   const getCategoryColor = (category: string) => {
     switch (category) {
       case 'self-love': return 'bg-pink-100 text-pink-800 border-pink-300';
-      case 'confidence': return 'bg-purple-100 text-purple-800 border-purple-300';
-      case 'beauty': return 'bg-rose-100 text-rose-800 border-rose-300';
-      case 'health': return 'bg-green-100 text-green-800 border-green-300';
-      case 'mindfulness': return 'bg-blue-100 text-blue-800 border-blue-300';
+      case 'confidence': return 'bg-rose-100 text-rose-800 border-rose-300';
+      case 'beauty': return 'bg-pink-100 text-pink-700 border-pink-300';
+      case 'health': return 'bg-rose-100 text-rose-700 border-rose-300';
+      case 'mindfulness': return 'bg-pink-50 text-rose-800 border-rose-200';
       default: return 'bg-gray-100 text-gray-800 border-gray-300';
     }
   };
@@ -83,7 +83,7 @@ const AffirmationApp: React.FC<AffirmationAppProps> = ({ onBack }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-rose-50 to-purple-50 flex flex-col">
+    <div className="min-h-screen flex flex-col">
       <AppNavigation 
         title="Аффирмация красоты" 
         onBack={onBack}
@@ -94,11 +94,15 @@ const AffirmationApp: React.FC<AffirmationAppProps> = ({ onBack }) => {
         <div className="max-w-2xl mx-auto space-y-6">
           {/* Заголовок и прогресс */}
           <div className="text-center space-y-4">
-            <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">
-              30-дневный челлендж красоты
-            </h1>
-            
-            {/* Прогресс бар */}
+            <div className="inline-block bg-white/90 backdrop-blur-lg rounded-3xl px-6 py-4 shadow-xl border-2 border-rose-200/50">
+              <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-pink-600 to-rose-600 bg-clip-text text-transparent">
+                30-дневный челлендж красоты
+              </h1>
+            </div>
+          </div>
+          
+          {/* Прогресс бар */}
+          <div className="bg-white/90 backdrop-blur-lg rounded-2xl p-4 shadow-lg border-2 border-rose-200/50">
             <div className="space-y-2">
               <div className="flex justify-between text-sm text-gray-600">
                 <span>Прогресс</span>
@@ -106,7 +110,7 @@ const AffirmationApp: React.FC<AffirmationAppProps> = ({ onBack }) => {
               </div>
               <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
                 <div 
-                  className="h-full bg-gradient-to-r from-pink-500 to-purple-500 transition-all duration-500 ease-out"
+                  className="h-full bg-gradient-to-r from-pink-400 to-rose-400 transition-all duration-500 ease-out"
                   style={{ width: `${progressPercentage}%` }}
                 />
               </div>
@@ -115,7 +119,7 @@ const AffirmationApp: React.FC<AffirmationAppProps> = ({ onBack }) => {
 
           {/* Текущий день */}
           {progress.completedDays.length < 30 && currentDayData && (
-            <div className="bg-white rounded-3xl shadow-xl p-6 sm:p-8 border-2 border-pink-200">
+            <div className="bg-white/95 backdrop-blur-lg rounded-3xl shadow-xl p-6 sm:p-8 border-2 border-pink-200/60">
               <div className="flex items-center justify-between mb-4">
                 <span className="text-sm font-bold text-pink-600">День {currentDayData.day}</span>
                 <span className={`px-3 py-1 rounded-full text-xs font-semibold border ${getCategoryColor(currentDayData.category)}`}>
@@ -127,7 +131,7 @@ const AffirmationApp: React.FC<AffirmationAppProps> = ({ onBack }) => {
                 "{currentDayData.affirmation}"
               </h2>
               
-              <div className="bg-gradient-to-br from-pink-50 to-purple-50 rounded-2xl p-5 mb-6">
+              <div className="bg-gradient-to-br from-pink-50 to-rose-50 rounded-2xl p-5 mb-6">
                 <h3 className="font-semibold text-gray-700 mb-2 flex items-center gap-2">
                   <span className="text-xl">✨</span> Задание на сегодня
                 </h3>
@@ -142,7 +146,7 @@ const AffirmationApp: React.FC<AffirmationAppProps> = ({ onBack }) => {
                 className={`w-full py-4 rounded-xl font-bold text-white transition-all duration-200 ${
                   progress.completedDays.includes(progress.currentDay)
                     ? 'bg-gray-400 cursor-not-allowed'
-                    : 'bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5'
+                    : 'bg-gradient-to-r from-pink-400 to-rose-400 hover:from-pink-300 hover:to-rose-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5'
                 }`}
               >
                 {progress.completedDays.includes(progress.currentDay) ? '✓ Выполнено' : 'Отметить как выполненное'}
@@ -152,7 +156,7 @@ const AffirmationApp: React.FC<AffirmationAppProps> = ({ onBack }) => {
 
           {/* Поздравление при завершении */}
           {progress.completedDays.length === 30 && (
-            <div className="bg-gradient-to-br from-pink-100 to-purple-100 rounded-3xl shadow-xl p-8 text-center border-2 border-pink-300">
+            <div className="bg-gradient-to-br from-pink-100/95 to-rose-100/95 backdrop-blur-lg rounded-3xl shadow-xl p-8 text-center border-2 border-rose-300/60">
               <div className="text-6xl mb-4">🎉</div>
               <h2 className="text-3xl font-bold text-gray-800 mb-4">
                 Поздравляем!
@@ -164,7 +168,7 @@ const AffirmationApp: React.FC<AffirmationAppProps> = ({ onBack }) => {
           )}
 
           {/* Календарь дней */}
-          <div className="bg-white rounded-3xl shadow-xl p-6 border-2 border-pink-200">
+          <div className="bg-white/95 backdrop-blur-lg rounded-3xl shadow-xl p-6 border-2 border-pink-200/60">
             <h3 className="font-bold text-gray-800 mb-4 text-lg">Календарь челленджа</h3>
             <div className="grid grid-cols-5 sm:grid-cols-10 gap-2">
               {affirmationsData.map((day) => {
@@ -176,8 +180,8 @@ const AffirmationApp: React.FC<AffirmationAppProps> = ({ onBack }) => {
                     key={day.day}
                     className={`
                       aspect-square rounded-lg flex items-center justify-center font-semibold text-sm transition-all duration-200
-                      ${isCompleted ? 'bg-gradient-to-br from-pink-500 to-purple-500 text-white shadow-md' : ''}
-                      ${isCurrent ? 'bg-pink-200 text-pink-800 ring-2 ring-pink-500 ring-offset-2' : ''}
+                      ${isCompleted ? 'bg-gradient-to-br from-pink-400 to-rose-400 text-white shadow-md' : ''}
+                      ${isCurrent ? 'bg-rose-200 text-rose-800 ring-2 ring-rose-500 ring-offset-2' : ''}
                       ${!isCompleted && !isCurrent ? 'bg-gray-100 text-gray-400' : ''}
                     `}
                   >
@@ -191,27 +195,29 @@ const AffirmationApp: React.FC<AffirmationAppProps> = ({ onBack }) => {
           {/* Кнопка сброса */}
           <div className="text-center">
             {!showResetConfirm ? (
-              <button
-                onClick={() => setShowResetConfirm(true)}
-                className="text-gray-500 hover:text-gray-700 text-sm underline transition-colors"
-              >
-                Начать заново
-              </button>
+              <div className="inline-block bg-white/85 backdrop-blur-md rounded-2xl px-4 py-2 shadow-md border border-rose-200/50">
+                <button
+                  onClick={() => setShowResetConfirm(true)}
+                  className="text-gray-600 hover:text-gray-800 text-sm underline transition-colors"
+                >
+                  Начать заново
+                </button>
+              </div>
             ) : (
-              <div className="bg-red-50 border-2 border-red-200 rounded-xl p-4 space-y-3">
+              <div className="bg-red-50/95 backdrop-blur-lg border-2 border-red-200 rounded-xl p-4 space-y-3 shadow-lg">
                 <p className="text-red-800 font-semibold">
                   Вы уверены? Весь прогресс будет удален.
                 </p>
                 <div className="flex gap-3 justify-center">
                   <button
                     onClick={resetProgress}
-                    className="px-6 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg font-semibold transition-colors"
+                    className="px-6 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg font-semibold transition-colors shadow-md"
                   >
                     Да, сбросить
                   </button>
                   <button
                     onClick={() => setShowResetConfirm(false)}
-                    className="px-6 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg font-semibold transition-colors"
+                    className="px-6 py-2 bg-white/90 backdrop-blur-sm hover:bg-white text-gray-700 rounded-lg font-semibold transition-colors border border-gray-300 shadow-md"
                   >
                     Отмена
                   </button>
@@ -222,8 +228,10 @@ const AffirmationApp: React.FC<AffirmationAppProps> = ({ onBack }) => {
         </div>
       </main>
 
-      <footer className="w-full text-center p-4 text-xs text-gray-500 bg-white border-t border-gray-200">
-        <p>&copy; {new Date().getFullYear()} Beauty Advice. Будьте прекрасны каждый день! 💖</p>
+      <footer className="w-full text-center p-4 text-xs">
+        <div className="inline-block bg-white/80 backdrop-blur-md rounded-2xl px-4 py-2 shadow-lg border border-rose-200/50">
+          <p className="text-gray-700">&copy; {new Date().getFullYear()} Beauty Advice. Будьте прекрасны каждый день! 💖</p>
+        </div>
       </footer>
     </div>
   );

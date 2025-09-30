@@ -132,9 +132,11 @@ const LoadingSpinner: React.FC = () => {
             </svg>
         </div>
       </div>
-      <p className="text-lg text-gray-700 tracking-wider animate-pulse min-h-[2rem] flex items-center justify-center text-center px-4">
-        {loadingMessages[currentMessage]}
-      </p>
+      <div className="bg-white/90 backdrop-blur-lg rounded-2xl px-6 py-3 shadow-lg border-2 border-rose-200/50">
+        <p className="text-lg text-gray-700 tracking-wider animate-pulse min-h-[2rem] flex items-center justify-center text-center">
+          {loadingMessages[currentMessage]}
+        </p>
+      </div>
     </div>
   );
 };
