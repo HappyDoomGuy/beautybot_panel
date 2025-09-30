@@ -1,6 +1,6 @@
 import { ZodiacSign, HoroscopeData } from '../types';
 
-const PROXY_URL = 'https://happydoomguy.pythonanywhere.com/gemini/models/gemini-2.5-flash:generateContent';
+const PROXY_URL = 'https://happydoomguy.pythonanywhere.com/gemini/models/gemini-2.5-flash-lite:generateContent';
 
 export const getHoroscope = async (sign: ZodiacSign): Promise<HoroscopeData> => {
   const today = new Date().toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
