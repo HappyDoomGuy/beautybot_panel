@@ -127,7 +127,7 @@ const LabAnalysisApp: React.FC<LabAnalysisAppProps> = ({ onBack }) => {
   );
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-white">
       <AppNavigation 
         title="Лабораторные анализы" 
         onBack={onBack}
@@ -138,7 +138,7 @@ const LabAnalysisApp: React.FC<LabAnalysisAppProps> = ({ onBack }) => {
       <main className="p-4 sm:p-6 lg:p-8">
         <div className="max-w-4xl mx-auto">
           <header className="text-center mb-8 sm:mb-10">
-            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
+            <h1 className="text-2xl sm:text-3xl font-bold text-rose-800 mb-3">
               Интерпретация результатов анализов крови
             </h1>
             <p className="text-gray-700">
@@ -148,8 +148,8 @@ const LabAnalysisApp: React.FC<LabAnalysisAppProps> = ({ onBack }) => {
 
           <div className="space-y-6">
             {/* File Upload Section */}
-            <section className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-6 sm:p-8">
-              <h2 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-5">
+            <section className="bg-gradient-to-br from-pink-50 to-rose-50 rounded-2xl shadow-lg border-2 border-rose-200 p-6 sm:p-8">
+              <h2 className="text-xl sm:text-2xl font-semibold text-rose-800 mb-5">
                 Загрузите файл анализов
               </h2>
               <input
@@ -164,16 +164,16 @@ const LabAnalysisApp: React.FC<LabAnalysisAppProps> = ({ onBack }) => {
                 onClick={triggerFileInput}
                 className={`
                   w-full p-5 sm:p-7 transition-all duration-200 ease-in-out
-                  bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600
-                  border-2 border-dashed border-gray-300 dark:border-gray-600
-                  hover:border-pink-500
-                  rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2
-                  ${selectedFile ? 'border-solid border-pink-500 bg-pink-50' : ''}
+                  bg-white hover:bg-pink-50
+                  border-2 border-dashed border-rose-300
+                  hover:border-rose-400
+                  rounded-xl focus:outline-none focus:ring-2 focus:ring-rose-400 focus:ring-offset-2
+                  ${selectedFile ? 'border-solid border-rose-400 bg-pink-50' : ''}
                 `}
                 aria-describedby="file-types-info"
               >
                 <div className="flex flex-col items-center justify-center text-center">
-                  <UploadIcon className="w-10 h-10 sm:w-12 sm:h-12 mb-3 text-gray-600" />
+                  <UploadIcon className="w-10 h-10 sm:w-12 sm:h-12 mb-3 text-rose-500" />
                   <span className="font-semibold text-gray-800">
                     {selectedFile ? selectedFile.name : 'Нажмите, чтобы выбрать файл'}
                   </span>
@@ -191,17 +191,17 @@ const LabAnalysisApp: React.FC<LabAnalysisAppProps> = ({ onBack }) => {
 
             {/* File Preview */}
             <ConditionalSection isVisible={!!selectedFile}>
-              <div className="bg-gray-50 dark:bg-gray-700 p-4 sm:p-5 rounded-xl">
+              <div className="bg-pink-50 p-4 sm:p-5 rounded-xl border border-rose-200">
                 <h2 className="font-semibold text-gray-800 mb-3 sr-only">
                   Предпросмотр файла
                 </h2>
                 {isPdf ? (
                   <div className="flex items-center text-gray-700 py-2">
-                    <DocumentTextIcon className="w-8 h-8 sm:w-10 sm:h-10 mr-3 text-gray-600 flex-shrink-0" />
+                    <DocumentTextIcon className="w-8 h-8 sm:w-10 sm:h-10 mr-3 text-rose-500 flex-shrink-0" />
                     <span className="break-all">{selectedFile?.name} (PDF документ)</span>
                   </div>
                 ) : previewUrl && (
-                  <div className="flex justify-center items-center max-h-80 overflow-hidden rounded-md bg-white dark:bg-gray-800 p-2 border border-gray-200 dark:border-gray-600">
+                  <div className="flex justify-center items-center max-h-80 overflow-hidden rounded-md bg-white p-2 border border-rose-200">
                     <img src={previewUrl} alt="Предпросмотр загруженного файла" className="max-w-full max-h-[calc(20rem-1rem)] object-contain rounded-md" />
                   </div>
                 )}
@@ -213,7 +213,7 @@ const LabAnalysisApp: React.FC<LabAnalysisAppProps> = ({ onBack }) => {
               <button
                 onClick={handleAnalyze}
                 disabled={isLoading}
-                className="px-8 py-3 sm:px-10 sm:py-3.5 font-semibold bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 disabled:bg-gray-400 text-white rounded-xl transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2"
+                className="px-8 py-3 sm:px-10 sm:py-3.5 font-semibold bg-gradient-to-r from-pink-400 to-rose-400 hover:from-pink-300 hover:to-rose-300 disabled:bg-gray-400 text-white rounded-xl transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-rose-400 focus:ring-offset-2"
               >
                 {isLoading ? (
                   <>
@@ -239,11 +239,11 @@ const LabAnalysisApp: React.FC<LabAnalysisAppProps> = ({ onBack }) => {
 
             {/* Analysis Results */}
             <ConditionalSection isVisible={!!analysisResult && !isLoading}>
-              <div className="bg-white dark:bg-gray-800 p-4 sm:p-5 rounded-xl border border-gray-200 dark:border-gray-700 shadow-lg">
-                <h2 className="text-xl sm:text-2xl font-semibold text-gray-800 dark:text-gray-100 mb-4">
+              <div className="bg-gradient-to-br from-pink-50 to-rose-50 p-4 sm:p-5 rounded-xl border-2 border-rose-200 shadow-lg">
+                <h2 className="text-xl sm:text-2xl font-semibold text-rose-800 mb-4">
                   Результаты интерпретации
                 </h2>
-                <div className="prose max-w-none bg-gray-50 dark:bg-gray-700 p-4 sm:p-5 rounded-lg overflow-x-auto">
+                <div className="prose prose-sm sm:prose-base max-w-none bg-white p-4 sm:p-5 rounded-lg overflow-x-auto text-gray-800">
                   <ReactMarkdown remarkPlugins={[remarkGfm]}>{analysisResult}</ReactMarkdown>
                 </div>
               </div>

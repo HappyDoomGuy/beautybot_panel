@@ -471,18 +471,18 @@ ${importantInstruction}
     }
   };
   
-  const aiButtonStyle = `w-full font-semibold py-3.5 px-6 rounded-xl text-base focus:outline-none focus:ring-2 ring-offset-2 ring-offset-white dark:ring-offset-gray-900 transition-all duration-200 ease-in-out \
-bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-200 \
+  const aiButtonStyle = `w-full font-semibold py-3.5 px-6 rounded-xl text-base focus:outline-none focus:ring-2 ring-offset-2 ring-offset-white transition-all duration-200 ease-in-out \
+bg-gradient-to-r from-pink-400 to-rose-400 text-white \
 shadow-lg hover:shadow-xl \
-hover:text-blue-600 dark:hover:text-blue-400 \
+hover:from-pink-300 hover:to-rose-300 \
 active:shadow-lg \
-active:text-blue-700 dark:active:text-blue-500 \
-focus:ring-blue-500 dark:focus:ring-blue-400 \
+active:from-pink-500 active:to-rose-500 \
+focus:ring-rose-400 \
 disabled:opacity-70 disabled:cursor-not-allowed \
-disabled:bg-gray-200 dark:disabled:bg-gray-700 \
-disabled:text-gray-400 dark:disabled:text-gray-500 \
+disabled:bg-gray-300 \
+disabled:text-gray-500 \
 disabled:shadow-lg \
-disabled:hover:text-gray-400 dark:disabled:hover:text-gray-500`;
+disabled:hover:from-pink-400 disabled:hover:to-rose-400`;
 
   const canRequestNewAiRecommendation = !!results && (!lastAiRequestSnapshot || lastAiRequestSnapshot !== getCurrentDataSnapshot());
 
@@ -501,9 +501,9 @@ disabled:hover:text-gray-400 dark:disabled:hover:text-gray-500`;
     if (!rawText) return "";
     // Ensure ### headers are block-level and have distinct styling
     let html = rawText
-      .replace(/^\s*### (.*?)\s*$/gm, '<h3 class="text-lg font-semibold mt-5 mb-2.5 text-gray-700 dark:text-gray-200">$1</h3>') 
-      .replace(/^\s*---\s*$/gm, '<hr class="my-5 border-gray-300 dark:border-gray-600" />')
-      .replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-gray-800 dark:text-gray-100">$1</strong>') 
+      .replace(/^\s*### (.*?)\s*$/gm, '<h3 class="text-lg font-semibold mt-5 mb-2.5 text-rose-700">$1</h3>') 
+      .replace(/^\s*---\s*$/gm, '<hr class="my-5 border-rose-200" />')
+      .replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-gray-900">$1</strong>') 
       .replace(/\*(.*?)\*/g, '<em>$1</em>');
 
     // Handle lists:
@@ -513,7 +513,7 @@ disabled:hover:text-gray-400 dark:disabled:hover:text-gray-500`;
     });
     // Wrap consecutive <li> items in <ul>
     html = html.replace(/(<li>.*?<\/li>\s*)+/g, (match) => {
-        return `<ul class="list-disc list-inside space-y-1.5 pl-2 mb-3 text-gray-700 dark:text-gray-300">${match}</ul>`;
+        return `<ul class="list-disc list-inside space-y-1.5 pl-2 mb-3 text-gray-800">${match}</ul>`;
     });
     
     // Convert numbered lists
@@ -526,9 +526,9 @@ disabled:hover:text-gray-400 dark:disabled:hover:text-gray-500`;
         const firstItem = match.match(/<li>(.*?)<\/li>/);
         if (firstItem && /^\d+\./.test(firstItem[1])) { // A bit fragile
             // Assume it's an ordered list if a leading number pattern was in the original text (now stripped)
-            return `<ol class="list-decimal list-inside space-y-1.5 pl-2 mb-3 text-gray-700 dark:text-gray-300">${match}</ol>`;
+            return `<ol class="list-decimal list-inside space-y-1.5 pl-2 mb-3 text-gray-800">${match}</ol>`;
         }
-        return `<ul class="list-disc list-inside space-y-1.5 pl-2 mb-3 text-gray-700 dark:text-gray-300">${match}</ul>`; // Fallback to ul
+        return `<ul class="list-disc list-inside space-y-1.5 pl-2 mb-3 text-gray-800">${match}</ul>`; // Fallback to ul
     });
 
     // General paragraphs for remaining lines not matching other patterns
@@ -538,7 +538,7 @@ disabled:hover:text-gray-400 dark:disabled:hover:text-gray-500`;
         if (trimmedLine === '' || trimmedLine.startsWith('<') || trimmedLine.endsWith('>')) {
             return line; // Keep existing HTML tags or empty lines
         }
-        return `<p class="mb-2.5 text-gray-700 dark:text-gray-300">${line}</p>`;
+        return `<p class="mb-2.5 text-gray-800 font-medium">${line}</p>`;
     }).join('\n');
     
     // Clean up potentially double-wrapped paragraphs or empty ones from formatting
@@ -554,23 +554,23 @@ disabled:hover:text-gray-400 dark:disabled:hover:text-gray-500`;
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-white">
       <AppNavigation 
         title="Калькулятор ИМТ с ИИ" 
         onBack={onBack}
         icon="⚖️"
-        gradient="from-yellow-500 to-orange-500"
+        gradient="from-pink-500 to-rose-500"
       />
       
       <main className="container mx-auto p-6 md:p-12">
         <header className="text-center mb-12 md:mb-16 relative">
-          <h1 className="text-3xl sm:text-4xl font-bold text-gray-800 dark:text-gray-100">Калории, белки, жиры, углеводы</h1>
-          <p className="text-gray-600 dark:text-gray-400 mt-3 text-base">Введите свои данные, чтобы рассчитать показатели, спланировать рацион и получить персональные рекомендации.</p>
+          <h1 className="text-3xl sm:text-4xl font-bold text-rose-800">Калории, белки, жиры, углеводы</h1>
+          <p className="text-gray-700 mt-3 text-base">Введите свои данные, чтобы рассчитать показатели, спланировать рацион и получить персональные рекомендации.</p>
         </header>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 md:gap-12">
-          <div className="lg:col-span-1 p-8 sm:p-10 rounded-2xl bg-white dark:bg-gray-800 shadow-xl border border-gray-200 dark:border-gray-700">
-            <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-100 mb-8">Ваши данные</h2>
+          <div className="lg:col-span-1 p-8 sm:p-10 rounded-2xl bg-gradient-to-br from-pink-50 to-rose-50 shadow-xl border-2 border-rose-200">
+            <h2 className="text-2xl font-semibold text-rose-800 mb-8">Ваши данные</h2>
             <InputControl
               label="Вес"
               id="weight"
@@ -636,11 +636,11 @@ disabled:hover:text-gray-400 dark:disabled:hover:text-gray-500`;
                 />
               </>
             ) : (
-              <div className="p-8 sm:p-10 rounded-2xl bg-white dark:bg-gray-800 shadow-xl border border-gray-200 dark:border-gray-700 text-center min-h-[300px] flex flex-col justify-center items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-20 h-20 text-gray-400 dark:text-gray-500 mb-6">
+              <div className="p-8 sm:p-10 rounded-2xl bg-gradient-to-br from-pink-50 to-rose-50 shadow-xl border-2 border-rose-200 text-center min-h-[300px] flex flex-col justify-center items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-20 h-20 text-rose-400 mb-6">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
                 </svg>
-                <p className="text-base text-gray-600 dark:text-gray-400">Введите ваши данные с помощью формы слева, чтобы увидеть результаты.</p>
+                <p className="text-base text-gray-700">Введите ваши данные с помощью формы слева, чтобы увидеть результаты.</p>
                 {Object.keys(errors).length > 0 && (
                    <p className="text-red-500 dark:text-red-400 mt-3 text-sm">Пожалуйста, исправьте ошибки в форме: {Object.values(errors).join(' ')}</p>
                 )}
@@ -650,8 +650,8 @@ disabled:hover:text-gray-400 dark:disabled:hover:text-gray-500`;
         </div>
 
         {/* AI Recommendation Section */}
-        <div className="mt-10 md:mt-12 p-8 sm:p-10 rounded-2xl bg-white dark:bg-gray-800 shadow-xl border border-gray-200 dark:border-gray-700">
-          <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-100 mb-6">
+        <div className="mt-10 md:mt-12 p-8 sm:p-10 rounded-2xl bg-gradient-to-br from-pink-50 to-rose-50 shadow-xl border-2 border-rose-200">
+          <h2 className="text-2xl font-semibold text-rose-800 mb-6">
             Рекомендации от ИИ
           </h2>
           
@@ -664,11 +664,11 @@ disabled:hover:text-gray-400 dark:disabled:hover:text-gray-500`;
           <>
             {isAiLoading && (
               <div className="flex flex-col items-center justify-center my-6 py-8">
-                <svg className="animate-spin h-12 w-12 text-blue-600 dark:text-blue-400 mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <svg className="animate-spin h-12 w-12 text-rose-500 mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                   <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                 </svg>
-                <p className="text-gray-600 dark:text-gray-400 text-base">Загружаем рекомендации...</p>
+                <p className="text-gray-700 text-base">Загружаем рекомендации...</p>
               </div>
             )}
 
@@ -683,7 +683,7 @@ disabled:hover:text-gray-400 dark:disabled:hover:text-gray-500`;
               <div className="my-6">
                 <button
                   onClick={toggleAiRecommendationExpansion}
-                  className={`w-full flex justify-between items-center p-4 rounded-lg text-left font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 transition-colors duration-150 ease-in-out ${ isAiRecommendationExpanded ? 'bg-gray-100 dark:bg-gray-700' : 'bg-transparent' } shadow-sm`}
+                  className={`w-full flex justify-between items-center p-4 rounded-lg text-left font-medium text-gray-700 hover:bg-white focus:outline-none focus:ring-2 focus:ring-rose-400 transition-colors duration-150 ease-in-out ${ isAiRecommendationExpanded ? 'bg-white border border-rose-200' : 'bg-transparent' } shadow-sm`}
                   aria-expanded={isAiRecommendationExpanded}
                 >
                   <span>
@@ -700,10 +700,10 @@ disabled:hover:text-gray-400 dark:disabled:hover:text-gray-500`;
                   </svg>
                 </button>
                 {isAiRecommendationExpanded && (
-                  <div className="mt-4 p-5 bg-blue-50 dark:bg-gray-700 rounded-xl shadow-md">
-                    <h3 className="text-lg font-semibold text-blue-700 dark:text-blue-300 mb-4">Ваши персональные рекомендации:</h3>
+                  <div className="mt-4 p-5 bg-white rounded-xl shadow-md border border-rose-200">
+                    <h3 className="text-lg font-semibold text-rose-700 mb-4">Ваши персональные рекомендации:</h3>
                     <div
-                      className="prose prose-sm sm:prose-base dark:prose-invert max-w-none ai-recommendation-content"
+                      className="prose prose-sm sm:prose-base max-w-none ai-recommendation-content text-gray-800"
                       dangerouslySetInnerHTML={{ __html: formatAIRecommendationHTML(aiRecommendation) }}
                     />
                   </div>
@@ -712,7 +712,7 @@ disabled:hover:text-gray-400 dark:disabled:hover:text-gray-500`;
             )}
 
             {!aiRecommendation && !isAiLoading && !aiError && (
-              <p className="text-gray-600 dark:text-gray-400 my-8 text-base">
+              <p className="text-gray-700 my-8 text-base">
                 Получите персональные советы по питанию и образу жизни на основе ваших данных и целей.
                 Рекомендации будут доступны после ввода всех данных и расчета показателей.
               </p>
@@ -735,8 +735,8 @@ disabled:hover:text-gray-400 dark:disabled:hover:text-gray-500`;
           </>
         </div>
 
-        <footer className="text-center mt-16 md:mt-20 py-8 border-t border-gray-200 dark:border-gray-700">
-          <p className="text-sm text-gray-500 dark:text-gray-400">
+        <footer className="text-center mt-16 md:mt-20 py-8 border-t border-rose-200">
+          <p className="text-sm text-gray-700">
             &copy; {new Date().getFullYear()} Beauty Panel. Все расчеты являются приблизительными и не заменяют консультацию специалиста. Рекомендации ИИ носят информационный характер.
           </p>
         </footer>
