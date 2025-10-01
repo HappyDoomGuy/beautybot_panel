@@ -32,6 +32,51 @@ const shuffleArray = (array: string[]) => {
 const shuffledBackgrounds = shuffleArray(backgroundImages);
 let currentIndex = 0;
 
+// Cache для загруженных изображений
+const loadedImages = new Set<string>();
+const imageCache = new Map<string, HTMLImageElement>();
+
+// Умная загрузка изображения с кэшированием
+const preloadImage = (src: string, priority: 'high' | 'low' = 'low'): Promise<void> => {
+  return new Promise((resolve, reject) => {
+    // Если уже загружено, сразу резолвим
+    if (loadedImages.has(src)) {
+      resolve();
+      return;
+    }
+
+    const img = new Image();
+    
+    // Используем fetchpriority для браузеров, которые это поддерживают
+    if (priority === 'high') {
+      img.fetchPriority = 'high';
+    }
+    
+    img.onload = () => {
+      loadedImages.add(src);
+      imageCache.set(src, img);
+      resolve();
+    };
+    
+    img.onerror = () => {
+      console.warn(`Failed to load image: ${src}`);
+      resolve(); // Резолвим даже при ошибке, чтобы не блокировать
+    };
+    
+    img.src = src;
+  });
+};
+
+// Загружаем следующее изображение заранее
+const preloadNextBackground = () => {
+  const nextIndex = (currentIndex + 1) % shuffledBackgrounds.length;
+  const nextNextIndex = (currentIndex + 2) % shuffledBackgrounds.length;
+  
+  // Загружаем следующие 2 фона с низким приоритетом
+  preloadImage(shuffledBackgrounds[nextIndex], 'low');
+  preloadImage(shuffledBackgrounds[nextNextIndex], 'low');
+};
+
 // Set initial background images
 document.documentElement.style.setProperty('--background-image-1', `url('${shuffledBackgrounds[0]}')`);
 document.documentElement.style.setProperty('--background-image-2', `url('${shuffledBackgrounds[1]}')`);
@@ -52,50 +97,53 @@ const rotateBackgrounds = () => {
     } else {
       document.documentElement.style.setProperty('--background-image-2', `url('${shuffledBackgrounds[nextIndex]}')`);
     }
+    
+    // Подгружаем следующие фоны
+    preloadNextBackground();
   }, 2000); // Update after transition completes
 };
 
 // Start background rotation every 30 seconds
 setInterval(rotateBackgrounds, 30000);
 
-// Preload background images and other critical resources
-const preloadResources = () => {
-  return new Promise((resolve) => {
-    const imagesToLoad: string[] = backgroundImages;
-    let loadedCount = 0;
-    const totalImages = imagesToLoad.length;
-    
-    if (totalImages === 0) {
-      resolve(true);
-      return;
+// Загружаем только критически важные изображения при старте
+const preloadCriticalResources = () => {
+  return Promise.all([
+    preloadImage(shuffledBackgrounds[0], 'high'), // Текущий фон
+    preloadImage(shuffledBackgrounds[1], 'high'), // Следующий фон
+  ]);
+};
+
+// Загружаем остальные изображения в фоне с низким приоритетом
+const preloadRemainingResources = () => {
+  // Используем requestIdleCallback для загрузки в свободное время
+  const loadRemaining = () => {
+    for (let i = 2; i < shuffledBackgrounds.length; i++) {
+      preloadImage(shuffledBackgrounds[i], 'low');
     }
-    
-    imagesToLoad.forEach((src) => {
-      const img = new Image();
-      img.onload = img.onerror = () => {
-        loadedCount++;
-        if (loadedCount === totalImages) {
-          resolve(true);
-        }
-      };
-      img.src = src;
-    });
-  });
+  };
+
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(loadRemaining, { timeout: 2000 });
+  } else {
+    // Fallback для браузеров без поддержки requestIdleCallback
+    setTimeout(loadRemaining, 2000);
+  }
 };
 
 // Initialize app
 const initApp = async () => {
-  // Render app
+  // Render app immediately
   ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
       <App />
     </React.StrictMode>,
   );
   
-  // Wait for resources to load
+  // Wait only for critical resources (first 2 backgrounds)
   await Promise.all([
-    preloadResources(),
-    new Promise(resolve => setTimeout(resolve, 1000)) // Minimum display time
+    preloadCriticalResources(),
+    new Promise(resolve => setTimeout(resolve, 500)) // Minimum display time (reduced from 1000ms)
   ]);
   
   // Hide loading screen with smooth transition
@@ -106,6 +154,9 @@ const initApp = async () => {
       loadingScreen.remove();
     }, 500);
   }
+  
+  // Load remaining images in the background after app is ready
+  preloadRemainingResources();
 };
 
 // Start initialization
