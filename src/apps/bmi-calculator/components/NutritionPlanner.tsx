@@ -48,9 +48,9 @@ const NutritionPlanner: React.FC<NutritionPlannerProps> = ({
   const fatCalories = (targetCalories * fatPercentage) / 100;
 
   const macronutrients: MacronutrientInfo[] = [
-    { name: 'Белки', grams: proteinCalories / MACRONUTRIENT_CALORIES_PER_GRAM.protein, calories: proteinCalories, percentage: proteinPercentage, color: 'bg-sky-500' },
-    { name: 'Углеводы', grams: carbCalories / MACRONUTRIENT_CALORIES_PER_GRAM.carbohydrate, calories: carbCalories, percentage: carbPercentage, color: 'bg-amber-500' },
-    { name: 'Жиры', grams: fatCalories / MACRONUTRIENT_CALORIES_PER_GRAM.fat, calories: fatCalories, percentage: fatPercentage, color: 'bg-lime-500' },
+    { name: 'Белки', grams: proteinCalories / MACRONUTRIENT_CALORIES_PER_GRAM.protein, calories: proteinCalories, percentage: proteinPercentage, color: 'bg-pink-400' },
+    { name: 'Углеводы', grams: carbCalories / MACRONUTRIENT_CALORIES_PER_GRAM.carbohydrate, calories: carbCalories, percentage: carbPercentage, color: 'bg-rose-600' },
+    { name: 'Жиры', grams: fatCalories / MACRONUTRIENT_CALORIES_PER_GRAM.fat, calories: fatCalories, percentage: fatPercentage, color: 'bg-rose-400' },
   ];
   
   let outcomeMessage = '';
@@ -62,9 +62,9 @@ const NutritionPlanner: React.FC<NutritionPlannerProps> = ({
   else outcomeMessage = `Этот рацион (${targetCalories} ккал) поможет сохранить текущий вес.`;
   
   const pieChartSegments = [
-    { percentage: proteinPercentage, color: '#0ea5e9', label: 'Белки' }, 
-    { percentage: carbPercentage, color: '#f59e0b', label: 'Углеводы' }, 
-    { percentage: fatPercentage, color: '#84cc16', label: 'Жиры' },    
+    { percentage: proteinPercentage, color: '#f472b6', label: 'Белки' }, 
+    { percentage: carbPercentage, color: '#e11d48', label: 'Углеводы' }, 
+    { percentage: fatPercentage, color: '#fb7185', label: 'Жиры' },    
   ];
   
   const getMacroBgColor = (baseColor: string) => {
@@ -142,56 +142,92 @@ const NutritionPlanner: React.FC<NutritionPlannerProps> = ({
         </div>
         
         <div>
-          <ul className="space-y-3">
-            {macronutrients.map(macro => (
-              <li key={macro.name} className={`p-3 rounded-lg ${getMacroBgColor(macro.color)}`}>
+          <ul className="space-y-4">
+            <li className={`p-4 rounded-lg ${getMacroBgColor('bg-pink-400')}`}>
+              <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center">
-                  <span className={`w-3.5 h-3.5 rounded-full mr-3 ${macro.color}`}></span>
-                  <span className="font-medium text-gray-700 text-base">{macro.name} ({macro.percentage.toFixed(0)}%)</span>
+                  <span className="w-3.5 h-3.5 rounded-full mr-3 bg-pink-400"></span>
+                  <span className="font-medium text-gray-700 text-base">Белки</span>
                 </div>
-                <div className="pl-[calc(0.875rem+0.75rem)] mt-1">
-                  <span className="text-sm text-gray-600">{macro.grams.toFixed(0)} г ({macro.calories.toFixed(0)} ккал)</span>
+                <span className="font-bold text-gray-800">{proteinPercentage}%</span>
+              </div>
+              <div className="mb-2">
+                <span className="text-sm text-gray-600">{(proteinCalories / MACRONUTRIENT_CALORIES_PER_GRAM.protein).toFixed(0)} г ({proteinCalories.toFixed(0)} ккал)</span>
+              </div>
+              <input
+                type="range"
+                id="proteinPercentage"
+                name="proteinPercentage"
+                value={proteinPercentage}
+                onChange={(e) => handleMacroChange('proteinPercentage', e.target.value)}
+                min={String(MIN_MACRO_PERCENTAGE)}
+                max={String(proteinSliderMax)}
+                step="1"
+                className="w-full h-2.5 bg-pink-200 rounded-lg appearance-none cursor-pointer accent-pink-400 hover:accent-pink-500"
+                style={{
+                  '--slider-color': '#f472b6',
+                  background: `linear-gradient(to right, #f472b6 0%, #f472b6 ${(proteinPercentage / parseInt(String(proteinSliderMax))) * 100}%, #fbcfe8 ${(proteinPercentage / parseInt(String(proteinSliderMax))) * 100}%, #fbcfe8 100%)`
+                } as React.CSSProperties}
+              />
+            </li>
+            
+            <li className={`p-4 rounded-lg ${getMacroBgColor('bg-rose-600')}`}>
+              <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center">
+                  <span className="w-3.5 h-3.5 rounded-full mr-3 bg-rose-600"></span>
+                  <span className="font-medium text-gray-700 text-base">Углеводы</span>
                 </div>
-              </li>
-            ))}
+                <span className="font-bold text-gray-800">{carbPercentage}%</span>
+              </div>
+              <div className="mb-2">
+                <span className="text-sm text-gray-600">{(carbCalories / MACRONUTRIENT_CALORIES_PER_GRAM.carbohydrate).toFixed(0)} г ({carbCalories.toFixed(0)} ккал)</span>
+              </div>
+              <input
+                type="range"
+                id="carbPercentage"
+                name="carbPercentage"
+                value={carbPercentage}
+                onChange={(e) => handleMacroChange('carbPercentage', e.target.value)}
+                min={String(MIN_MACRO_PERCENTAGE)}
+                max={String(actualCarbAndFatMax)}
+                step="1"
+                className="w-full h-2.5 bg-rose-200 rounded-lg appearance-none cursor-pointer accent-rose-600 hover:accent-rose-700"
+                style={{
+                  '--slider-color': '#e11d48',
+                  background: `linear-gradient(to right, #e11d48 0%, #e11d48 ${(carbPercentage / actualCarbAndFatMax) * 100}%, #fecdd3 ${(carbPercentage / actualCarbAndFatMax) * 100}%, #fecdd3 100%)`
+                } as React.CSSProperties}
+              />
+            </li>
+            
+            <li className={`p-4 rounded-lg ${getMacroBgColor('bg-rose-400')}`}>
+              <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center">
+                  <span className="w-3.5 h-3.5 rounded-full mr-3 bg-rose-400"></span>
+                  <span className="font-medium text-gray-700 text-base">Жиры</span>
+                </div>
+                <span className="font-bold text-gray-800">{fatPercentage}%</span>
+              </div>
+              <div className="mb-2">
+                <span className="text-sm text-gray-600">{(fatCalories / MACRONUTRIENT_CALORIES_PER_GRAM.fat).toFixed(0)} г ({fatCalories.toFixed(0)} ккал)</span>
+              </div>
+              <input
+                type="range"
+                id="fatPercentage"
+                name="fatPercentage"
+                value={fatPercentage}
+                onChange={(e) => handleMacroChange('fatPercentage', e.target.value)}
+                min={String(MIN_MACRO_PERCENTAGE)}
+                max={String(actualCarbAndFatMax)}
+                step="1"
+                className="w-full h-2.5 bg-rose-200 rounded-lg appearance-none cursor-pointer accent-rose-400 hover:accent-rose-500"
+                style={{
+                  '--slider-color': '#fb7185',
+                  background: `linear-gradient(to right, #fb7185 0%, #fb7185 ${(fatPercentage / actualCarbAndFatMax) * 100}%, #fecdd3 ${(fatPercentage / actualCarbAndFatMax) * 100}%, #fecdd3 100%)`
+                } as React.CSSProperties}
+              />
+            </li>
           </ul>
         </div>
-      </div>
-      
-      <div className="my-8 space-y-4 pt-4">
-        <InputControl
-          label="Белки"
-          id="proteinPercentage"
-          type="range"
-          value={String(proteinPercentage)}
-          onChange={(e) => handleMacroChange('proteinPercentage', e.target.value)}
-          unit="%"
-          min={String(MIN_MACRO_PERCENTAGE)}
-          max={String(proteinSliderMax)} 
-          step="1"
-        />
-        <InputControl
-          label="Углеводы"
-          id="carbPercentage"
-          type="range"
-          value={String(carbPercentage)}
-          onChange={(e) => handleMacroChange('carbPercentage', e.target.value)}
-          unit="%"
-          min={String(MIN_MACRO_PERCENTAGE)}
-          max={String(actualCarbAndFatMax)}
-          step="1"
-        />
-        <InputControl
-          label="Жиры"
-          id="fatPercentage"
-          type="range"
-          value={String(fatPercentage)}
-          onChange={(e) => handleMacroChange('fatPercentage', e.target.value)}
-          unit="%"
-          min={String(MIN_MACRO_PERCENTAGE)}
-          max={String(actualCarbAndFatMax)}
-          step="1"
-        />
       </div>
     </div>
   );

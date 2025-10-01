@@ -69,10 +69,10 @@ const BMICalculatorApp: React.FC<BMICalculatorAppProps> = ({ onBack }) => {
       }
     }
     return {
-      weight: '70',
-      height: '175',
+      weight: '60',
+      height: '165',
       age: '30',
-      gender: Gender.MALE,
+      gender: Gender.FEMALE,
       activityLevel: ActivityLevel.MODERATE,
     };
   });
