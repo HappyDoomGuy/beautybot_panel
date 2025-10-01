@@ -95,7 +95,7 @@ const AffirmationApp: React.FC<AffirmationAppProps> = ({ onBack }) => {
           {/* Заголовок и прогресс */}
           <div className="text-center space-y-3">
             <div className="inline-block bg-white/90 backdrop-blur-lg rounded-3xl px-5 py-3 shadow-xl border-2 border-rose-200/50">
-              <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-pink-600 to-rose-600 bg-clip-text text-transparent">
+              <h1 className="text-2xl sm:text-3xl font-bold text-rose-800">
                 30-дневный челлендж красоты
               </h1>
             </div>
