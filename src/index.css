@@ -29,7 +29,30 @@ input, textarea, [contenteditable] {
 
 /* Фон с рандомным изображением (hearts.jpg или image2.jpg) */
 :root {
-  --background-image: url('/hearts.jpg'); /* Значение по умолчанию, заменяется в main.tsx */
+  --background-image-1: url('/hearts.jpg'); /* Первый слой фона */
+  --background-image-2: url('/image2.jpg'); /* Второй слой фона */
+}
+
+/* Анимация плавного движения и масштабирования фона (Ken Burns эффект) */
+@keyframes backgroundFlow {
+  0% {
+    transform: scale(1) translate(0, 0);
+  }
+  20% {
+    transform: scale(1.06) translate(-3%, 2%);
+  }
+  40% {
+    transform: scale(1.08) translate(2%, -2%);
+  }
+  60% {
+    transform: scale(1.05) translate(3%, 1%);
+  }
+  80% {
+    transform: scale(1.07) translate(-2%, -3%);
+  }
+  100% {
+    transform: scale(1) translate(0, 0);
+  }
 }
 
 body {
@@ -37,43 +60,61 @@ body {
   min-height: 100vh;
   font-family: system-ui, -apple-system, sans-serif;
   color: #333333;
+  overflow-x: hidden;
 }
 
+/* Первый слой фона */
 body::before {
   content: '';
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: var(--background-image) center/cover no-repeat fixed;
+  top: -10%;
+  left: -10%;
+  width: 120%;
+  height: 120%;
+  background: var(--background-image-1) center/cover no-repeat;
   filter: brightness(0.82) saturate(0.8);
-  z-index: -1;
+  z-index: -3;
+  animation: backgroundFlow 37s ease-in-out infinite;
+  opacity: 1;
+  transition: opacity 2s ease-in-out;
 }
 
+/* Второй слой фона (для кроссфейда) */
 body::after {
   content: '';
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, rgba(80, 20, 40, 0.25), rgba(100, 30, 50, 0.25));
-  z-index: -1;
+  top: -10%;
+  left: -10%;
+  width: 120%;
+  height: 120%;
+  background: var(--background-image-2) center/cover no-repeat;
+  filter: brightness(0.82) saturate(0.8);
+  z-index: -2;
+  animation: backgroundFlow 37s ease-in-out infinite;
+  animation-delay: -18.5s; /* Смещение анимации для разнообразия */
+  opacity: 0;
+  transition: opacity 2s ease-in-out;
 }
 
-/* Принудительно фон с hearts.jpg */
+/* Переключение слоев */
+body.bg-layer-active::before {
+  opacity: 0;
+}
+
+body.bg-layer-active::after {
+  opacity: 1;
+}
+
+/* Градиентный оверлей поверх фонов */
+body {
+  background: linear-gradient(135deg, rgba(80, 20, 40, 0.25), rgba(100, 30, 50, 0.25));
+  background-attachment: fixed;
+}
+
+/* Темная тема */
 @media (prefers-color-scheme: dark) {
   body {
     color: #333333;
-  }
-  
-  body::before {
-    filter: brightness(0.82) saturate(0.8);
-  }
-  
-  body::after {
-    background: linear-gradient(135deg, rgba(80, 20, 40, 0.25), rgba(100, 30, 50, 0.25));
   }
 }
 

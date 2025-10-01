@@ -18,10 +18,45 @@ const backgroundImages = [
   '/image11.jpg',
   '/image12.jpg'
 ];
-const selectedBackground = backgroundImages[Math.floor(Math.random() * backgroundImages.length)];
 
-// Set CSS variable for background image
-document.documentElement.style.setProperty('--background-image', `url('${selectedBackground}')`);
+// Shuffle array for random order
+const shuffleArray = (array: string[]) => {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+};
+
+const shuffledBackgrounds = shuffleArray(backgroundImages);
+let currentIndex = 0;
+
+// Set initial background images
+document.documentElement.style.setProperty('--background-image-1', `url('${shuffledBackgrounds[0]}')`);
+document.documentElement.style.setProperty('--background-image-2', `url('${shuffledBackgrounds[1]}')`);
+
+// Background rotation function
+const rotateBackgrounds = () => {
+  currentIndex = (currentIndex + 1) % shuffledBackgrounds.length;
+  const nextIndex = (currentIndex + 1) % shuffledBackgrounds.length;
+  
+  // Toggle between the two background layers
+  const body = document.body;
+  body.classList.toggle('bg-layer-active');
+  
+  // Preload next image and update the hidden layer
+  setTimeout(() => {
+    if (body.classList.contains('bg-layer-active')) {
+      document.documentElement.style.setProperty('--background-image-1', `url('${shuffledBackgrounds[nextIndex]}')`);
+    } else {
+      document.documentElement.style.setProperty('--background-image-2', `url('${shuffledBackgrounds[nextIndex]}')`);
+    }
+  }, 2000); // Update after transition completes
+};
+
+// Start background rotation every 30 seconds
+setInterval(rotateBackgrounds, 30000);
 
 // Preload background images and other critical resources
 const preloadResources = () => {
