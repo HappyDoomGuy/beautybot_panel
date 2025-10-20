@@ -14,7 +14,7 @@ const ZodiacSelector: React.FC<ZodiacSelectorProps> = ({ onSelect, zodiacSigns }
                 <h2 className="text-xl md:text-2xl font-bold text-rose-800 mb-1">
                     Персональный гороскоп
                 </h2>
-                <p className="text-sm text-gray-700">Выберите свой знак зодиака, чтобы получить свой персональный гороскоп на сегодня.</p>
+                <p className="text-sm text-gray-700">Выберите свой знак зодиака, чтобы получить персональный гороскоп на сегодня.</p>
             </div>
         </div>
         <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 md:gap-4">
