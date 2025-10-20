@@ -65,7 +65,7 @@ const HoroscopeApp: React.FC<HoroscopeAppProps> = ({ onBack }) => {
   return (
     <div className="min-h-screen flex flex-col">
       <AppNavigation 
-        title="Гороскоп красоты" 
+        title="Beauty Advice" 
         onBack={onBack}
         icon="✨"
         gradient="from-pink-500 to-rose-500"

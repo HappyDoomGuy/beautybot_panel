@@ -127,7 +127,7 @@ const LabAnalysisApp: React.FC<LabAnalysisAppProps> = ({ onBack }) => {
   return (
     <div className="min-h-screen">
       <AppNavigation 
-        title="Лабораторные анализы" 
+        title="Beauty Advice" 
         onBack={onBack}
         icon="🧪"
         gradient="from-pink-500 to-rose-500"
@@ -138,7 +138,7 @@ const LabAnalysisApp: React.FC<LabAnalysisAppProps> = ({ onBack }) => {
           <header className="text-center mb-6 sm:mb-8">
             <div className="inline-block bg-white/90 backdrop-blur-lg rounded-3xl px-6 py-4 shadow-xl border-2 border-rose-200/50">
               <h1 className="text-2xl sm:text-3xl font-bold text-rose-800 mb-3">
-                Интерпретация результатов анализов крови
+                Расшифровщик медицинских анализов
               </h1>
               <p className="text-gray-700">
                 Загрузите ваш анализ для расшифровки при помощи ИИ.

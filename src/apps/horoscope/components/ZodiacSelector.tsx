@@ -12,9 +12,9 @@ const ZodiacSelector: React.FC<ZodiacSelectorProps> = ({ onSelect, zodiacSigns }
         <div className="text-center mb-4 sm:mb-6">
             <div className="inline-block bg-white/90 backdrop-blur-lg rounded-3xl px-4 py-3 shadow-xl border-2 border-rose-200/50">
                 <h2 className="text-xl md:text-2xl font-bold text-rose-800 mb-1">
-                    Выберите свой знак зодиака
+                    Персональный гороскоп
                 </h2>
-                <p className="text-sm text-gray-700">Чтобы получить свой персональный гороскоп на сегодня.</p>
+                <p className="text-sm text-gray-700">Выберите свой знак зодиака, чтобы получить свой персональный гороскоп на сегодня.</p>
             </div>
         </div>
         <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 md:gap-4">

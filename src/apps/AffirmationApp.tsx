@@ -85,7 +85,7 @@ const AffirmationApp: React.FC<AffirmationAppProps> = ({ onBack }) => {
   return (
     <div className="min-h-screen flex flex-col">
       <AppNavigation 
-        title="Аффирмация красоты" 
+        title="Beauty Advice" 
         onBack={onBack}
         gradient="from-pink-500 to-rose-500"
       />

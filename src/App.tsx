@@ -9,7 +9,16 @@ import { useTelegram } from './hooks/useTelegram';
 export type AppType = 'home' | 'horoscope' | 'lab-analysis' | 'bmi-calculator' | 'affirmation';
 
 const App: React.FC = () => {
-  const [currentApp, setCurrentApp] = useState<AppType>('home');
+  const [currentApp, setCurrentApp] = useState<AppType>(() => {
+    // Читаем параметр app из URL при первой загрузке
+    const params = new URLSearchParams(window.location.search);
+    const appParam = params.get('app');
+    const validApps: AppType[] = ['home', 'horoscope', 'lab-analysis', 'bmi-calculator', 'affirmation'];
+    if (appParam && validApps.includes(appParam as AppType)) {
+      return appParam as AppType;
+    }
+    return 'home';
+  });
   const { webApp, isTelegram, hapticFeedback } = useTelegram();
 
   // Инициализация Telegram Web App
@@ -33,6 +42,19 @@ const App: React.FC = () => {
       }
     }
   }, [isTelegram, webApp]);
+
+  // Обновляем URL при изменении раздела
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (currentApp === 'home') {
+      // Удаляем параметр для главной страницы
+      params.delete('app');
+    } else {
+      params.set('app', currentApp);
+    }
+    const newUrl = params.toString() ? `${window.location.pathname}?${params.toString()}` : window.location.pathname;
+    window.history.replaceState({}, '', newUrl);
+  }, [currentApp]);
 
   const handleAppSelect = (app: AppType) => {
     hapticFeedback.selection();

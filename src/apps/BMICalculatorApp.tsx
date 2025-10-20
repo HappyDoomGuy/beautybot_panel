@@ -556,7 +556,7 @@ disabled:hover:from-pink-400 disabled:hover:to-rose-400`;
   return (
     <div className="min-h-screen overflow-x-hidden">
       <AppNavigation 
-        title="Калькулятор ИМТ с ИИ" 
+        title="Beauty Advice" 
         onBack={onBack}
         icon="⚖️"
         gradient="from-pink-500 to-rose-500"
@@ -565,7 +565,7 @@ disabled:hover:from-pink-400 disabled:hover:to-rose-400`;
       <main className="container mx-auto p-4 md:p-6 max-w-full">
         <header className="text-center mb-6 md:mb-8 relative">
           <div className="inline-block bg-white/90 backdrop-blur-lg rounded-3xl px-6 py-4 shadow-xl border-2 border-rose-200/50 max-w-[90vw]">
-            <h1 className="text-3xl sm:text-4xl font-bold text-rose-800 break-words">Калории, белки, жиры, углеводы</h1>
+            <h1 className="text-3xl sm:text-4xl font-bold text-rose-800 break-words">Умный нутрициолог</h1>
             <p className="text-gray-700 mt-3 text-base break-words">Введите свои данные, чтобы рассчитать показатели, спланировать рацион и получить персональные рекомендации.</p>
           </div>
         </header>
