@@ -3,7 +3,7 @@
  */
 
 // URL вашего Google Apps Script Web App
-const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyqihzVxodDXLghH6U3LQkOZh-L7E3mYKaX-4_0Irum_TIrUQoOGHrTiuAhQrzc2BnY/exec';
+const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby8d7RMjb4inVc31QaWW7ZiKPLOnjgrKKX-xJxJBY7Hvt1i2bE9ZXY0OVoort0w4ozw7w/exec';
 
 export type AppSection = 'bmi-calculator' | 'lab-analysis' | 'horoscope' | 'affirmation';
 
