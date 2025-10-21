@@ -15,6 +15,19 @@ interface AnalyticsData {
 }
 
 /**
+ * Возвращает читаемое название раздела (для отладки)
+ */
+const getSectionName = (section: AppSection): string => {
+  const names = {
+    'bmi-calculator': 'Умный нутрициолог',
+    'lab-analysis': 'Расшифровщик анализов',
+    'horoscope': 'Персональный гороскоп',
+    'affirmation': 'Аффирмации красоты'
+  };
+  return names[section] || section;
+};
+
+/**
  * Отправляет данные о посещении раздела в Google Sheets
  */
 export const trackSectionVisit = async (section: AppSection, userId?: string): Promise<void> => {
@@ -42,12 +55,31 @@ export const trackSectionVisit = async (section: AppSection, userId?: string): P
     }
   }
 
+  // Форматируем дату в формате "21.10.2025 14:07:43"
+  const now = new Date();
+  const day = String(now.getDate()).padStart(2, '0');
+  const month = String(now.getMonth() + 1).padStart(2, '0');
+  const year = now.getFullYear();
+  const hours = String(now.getHours()).padStart(2, '0');
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+  const seconds = String(now.getSeconds()).padStart(2, '0');
+  const formattedTimestamp = `${day}.${month}.${year} ${hours}:${minutes}:${seconds}`;
+
   const data: AnalyticsData = {
     userId: telegramUserId,
     fullName: fullName,
     section,
-    timestamp: new Date().toISOString(),
+    timestamp: formattedTimestamp,
   };
+
+  // Отладка: выводим что именно отправляется
+  console.log('📊 Analytics data:', {
+    section,
+    userId: telegramUserId,
+    fullName,
+    timestamp: formattedTimestamp,
+    sectionName: getSectionName(section)
+  });
 
   try {
     // Отправляем данные в Google Apps Script
@@ -60,7 +92,7 @@ export const trackSectionVisit = async (section: AppSection, userId?: string): P
       body: JSON.stringify(data),
     });
 
-    console.log('Analytics tracked:', { section, userId: telegramUserId });
+    console.log('✅ Analytics tracked successfully:', { section, userId: telegramUserId });
   } catch (error) {
     console.error('Failed to track analytics:', error);
     // Не бросаем ошибку, чтобы не ломать пользовательский опыт
