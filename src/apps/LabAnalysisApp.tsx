@@ -256,7 +256,7 @@ const LabAnalysisApp: React.FC<LabAnalysisAppProps> = ({ onBack }) => {
 
       <footer className="w-full text-center p-4 text-xs">
         <div className="inline-block bg-white/80 backdrop-blur-md rounded-2xl px-4 py-2 shadow-lg border border-rose-200/50">
-          <p className="text-gray-700">&copy; {new Date().getFullYear()} Beauty Panel. Результаты не являются диагнозом.</p>
+          <p className="text-gray-700">&copy; {new Date().getFullYear()} Beauty Advice. Результаты не являются диагнозом.</p>
         </div>
       </footer>
     </div>

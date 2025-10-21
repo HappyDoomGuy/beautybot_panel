@@ -740,7 +740,7 @@ disabled:hover:from-pink-400 disabled:hover:to-rose-400`;
         <footer className="text-center mt-8 md:mt-12 py-6">
           <div className="inline-block bg-white/85 backdrop-blur-lg rounded-2xl px-6 py-4 shadow-lg border-2 border-rose-200/50 max-w-[90vw]">
             <p className="text-sm text-gray-700 break-words">
-              &copy; {new Date().getFullYear()} Beauty Panel. Все расчеты являются приблизительными и не заменяют консультацию специалиста. Рекомендации ИИ носят информационный характер.
+              &copy; {new Date().getFullYear()} Beauty Advice. Все расчеты являются приблизительными и не заменяют консультацию специалиста. Рекомендации ИИ носят информационный характер.
             </p>
           </div>
         </footer>

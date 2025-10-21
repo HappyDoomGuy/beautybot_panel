@@ -5,6 +5,7 @@ import { LabAnalysisApp } from './apps/LabAnalysisApp';
 import { BMICalculatorApp } from './apps/BMICalculatorApp';
 import { AffirmationApp } from './apps/AffirmationApp';
 import { useTelegram } from './hooks/useTelegram';
+import { trackSectionVisit, AppSection } from './utils/analytics';
 
 export type AppType = 'home' | 'horoscope' | 'lab-analysis' | 'bmi-calculator' | 'affirmation';
 
@@ -54,6 +55,14 @@ const App: React.FC = () => {
     }
     const newUrl = params.toString() ? `${window.location.pathname}?${params.toString()}` : window.location.pathname;
     window.history.replaceState({}, '', newUrl);
+  }, [currentApp]);
+
+  // Отслеживаем посещения разделов для аналитики в Google Sheets
+  useEffect(() => {
+    // Отслеживаем только разделы приложений, не главную страницу
+    if (currentApp !== 'home') {
+      trackSectionVisit(currentApp as AppSection);
+    }
   }, [currentApp]);
 
   const handleAppSelect = (app: AppType) => {
