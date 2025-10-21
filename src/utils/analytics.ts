@@ -37,22 +37,50 @@ export const trackSectionVisit = async (section: AppSection, userId?: string): P
     return;
   }
 
-  // Получаем данные пользователя из Telegram WebApp
-  let telegramUserId = userId || 'anonymous';
+  // Сначала проверяем UTM параметры в URL
+  let telegramUserId = 'anonymous';
   let fullName = 'Anonymous';
-
-  if (typeof window !== 'undefined' && (window as any).Telegram?.WebApp) {
-    const webApp = (window as any).Telegram.WebApp;
-    const user = webApp.initDataUnsafe?.user;
+  
+  if (typeof window !== 'undefined') {
+    const urlParams = new URLSearchParams(window.location.search);
+    const utmId = urlParams.get('utm_id');
+    const utmFullName = urlParams.get('utm_fullname');
     
-    if (user) {
-      telegramUserId = user.id?.toString() || 'anonymous';
-      
-      // Формируем полное имя из first_name и last_name
-      const firstName = user.first_name || '';
-      const lastName = user.last_name || '';
-      fullName = `${firstName} ${lastName}`.trim() || user.username || 'Anonymous';
+    // Если есть UTM параметры, используем их
+    if (utmId) {
+      telegramUserId = utmId;
+      console.log('📊 Using utm_id from URL:', utmId);
     }
+    if (utmFullName) {
+      fullName = decodeURIComponent(utmFullName);
+      console.log('📊 Using utm_fullname from URL:', fullName);
+    }
+    
+    // Если UTM параметров нет, получаем данные из Telegram WebApp
+    if (!utmId || !utmFullName) {
+      if ((window as any).Telegram?.WebApp) {
+        const webApp = (window as any).Telegram.WebApp;
+        const user = webApp.initDataUnsafe?.user;
+        
+        if (user) {
+          if (!utmId) {
+            telegramUserId = user.id?.toString() || 'anonymous';
+          }
+          
+          if (!utmFullName) {
+            // Формируем полное имя из first_name и last_name
+            const firstName = user.first_name || '';
+            const lastName = user.last_name || '';
+            fullName = `${firstName} ${lastName}`.trim() || user.username || 'Anonymous';
+          }
+        }
+      }
+    }
+  }
+  
+  // Если передан userId явно, используем его
+  if (userId) {
+    telegramUserId = userId;
   }
 
   // Форматируем дату в формате "21.10.2025 14:07:43"
@@ -73,12 +101,16 @@ export const trackSectionVisit = async (section: AppSection, userId?: string): P
   };
 
   // Отладка: выводим что именно отправляется
+  const urlParams = new URLSearchParams(window.location.search);
+  const hasUtmParams = urlParams.has('utm_id') || urlParams.has('utm_fullname');
+  
   console.log('📊 Analytics data:', {
     section,
+    sectionName: getSectionName(section),
     userId: telegramUserId,
     fullName,
     timestamp: formattedTimestamp,
-    sectionName: getSectionName(section)
+    source: hasUtmParams ? 'UTM parameters' : 'Telegram WebApp'
   });
 
   try {
