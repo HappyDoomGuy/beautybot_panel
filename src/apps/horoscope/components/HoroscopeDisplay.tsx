@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import { HoroscopeData, ZodiacSignInfo } from '../types';
+import ZodiacIcon from './ZodiacIcon';
 
 interface HoroscopeDisplayProps {
   horoscopeData: HoroscopeData;
@@ -19,7 +20,9 @@ const HoroscopeDisplay: React.FC<HoroscopeDisplayProps> = ({ horoscopeData, zodi
   return (
     <div className="w-full max-w-2xl bg-gradient-to-br from-pink-50/95 to-rose-50/95 backdrop-blur-lg rounded-3xl border-2 border-rose-200/60 shadow-2xl p-6 md:p-8 animate-fade-in-up">
       <div className="text-center mb-6">
-          <div className="mx-auto text-6xl mb-2" style={{ filter: 'hue-rotate(65deg) brightness(2.2) saturate(1.8)' }}>{zodiacSignData.symbol}</div>
+          <div className="mx-auto mb-2">
+            <ZodiacIcon sign={zodiacSignData.name} className="text-6xl" />
+          </div>
           <h2 className="text-3xl font-bold text-rose-700">{zodiacSignData.name}</h2>
           <p className="text-sm text-gray-600">{zodiacSignData.dates}</p>
       </div>

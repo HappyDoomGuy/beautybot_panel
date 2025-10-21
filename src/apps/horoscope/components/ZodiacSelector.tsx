@@ -1,5 +1,6 @@
 import React from 'react';
 import { ZodiacSignInfo } from '../types';
+import ZodiacIcon from './ZodiacIcon';
 
 interface ZodiacSelectorProps {
   onSelect: (sign: ZodiacSignInfo) => void;
@@ -24,9 +25,10 @@ const ZodiacSelector: React.FC<ZodiacSelectorProps> = ({ onSelect, zodiacSigns }
                     onClick={() => onSelect(sign)}
                     className="group flex flex-col items-center p-3 bg-gradient-to-br from-pink-100/95 to-rose-100/95 backdrop-blur-md rounded-2xl border-2 border-rose-400 hover:border-rose-500 hover:from-pink-200/95 hover:to-rose-200/95 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-rose-500 transform hover:-translate-y-1 shadow-lg hover:shadow-xl"
                 >
-                    <span className="text-3xl sm:text-4xl mb-1 group-hover:scale-110 transition-transform duration-300" style={{ filter: 'hue-rotate(65deg) brightness(2.2) saturate(1.8)' }}>
-                        {sign.symbol}
-                    </span>
+                    <ZodiacIcon 
+                        sign={sign.name} 
+                        className="text-3xl sm:text-4xl mb-1 group-hover:scale-110 transition-transform duration-300"
+                    />
                     <span className="font-semibold text-xs sm:text-sm text-gray-800">{sign.name}</span>
                     <span className="text-xs text-gray-600 hidden sm:block">{sign.dates}</span>
                 </button>
